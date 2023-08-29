@@ -159,17 +159,6 @@
                                 </div>
                             </div> <!-- end of registration section -->
                         </form>
-                        <div class="social-login"> <!-- start social icon div -->
-                            <h5>or register with</h5>
-                            <ul class="social-page-nav">
-                                <li><a href="#" class="fb"><i class="social_facebook"></i></a></li>
-                                <li><a href="#" class="tw"><i class="social_twitter"></i></a></li>
-                                <li><a href="#" class="gp"><i class="social_googleplus"></i></a></li>
-                                <li><a href="#" class="ln"><i class="social_linkedin"></i></a></li>
-                                <li><a href="#" class="rs"><i class="social_rss"></i></a></li>
-                            </ul>
-                        </div> <!-- end social icon div -->
-
                     </div>
                 </div>
             </div><!--  end of registration form portin -->
