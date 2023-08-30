@@ -18,16 +18,16 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active">
-                        <a href="/">{{ __('navbar.home') }}</a>
+                        <a href="{{ route('home') }}">{{ __('navbar.home') }}</a>
                     </li>
                     <li class="">
-                        <a href="/cars">{{ __('navbar.cars') }}</a>
+                        <a href="{{ route('cars') }}">{{ __('navbar.cars') }}</a>
                     </li>
                     <li class="">
                         <a href="/blog">{{ __('navbar.blog') }}</a>
                     </li>
                     <li class="">
-                        <a href="/contact">{{ __('navbar.contact') }}</a>
+                        <a href="/contact ">{{ __('navbar.contact') }}</a>
                     </li>
                     <li class="">
                         <a href="/about-us">{{ __('navbar.about-us') }}</a>
