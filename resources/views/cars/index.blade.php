@@ -67,7 +67,7 @@
 @endsection
 @section('content')
     @if( isset($hasQuery) == 0)
-        <div class="inner-page-banner" style="background: url('img/inner-banner/listing-banner.jpg') top center no-repeat; background-size: cover;">
+        <div class="inner-page-banner" style="background: url({{ asset('img/inner-banner/listing-banner.jpg') }}) top center no-repeat; background-size: cover;">
             <div class="rq-overlay"></div>
             <div class="container">
                 <div class="rq-title-container bredcrumb-title text-center">
@@ -266,11 +266,11 @@
                                     <div class="col-md-4 col-sm-6">
                                         <div class="listing-single">
                                             <div class="listing-img">
-                                                <img src="img/car-listing-grid/car1.jpg" alt="">
+                                                <img src="{{ $car->imageable->first()->url ?? '' }}" alt="">
                                             </div>
                                             <div class="listing-details">
                                                 <h5 class="car-brand">{{ $car->brand }}</h5>
-                                                <h3 class="car-name"><a href="#">{{ $car->brand . ' ' . $car->name}}</a></h3>
+                                                <h3 class="car-name"><a href="{{ route('detail',$car->id)  }}">{{ $car->brand . ' ' . $car->model}}</a></h3>
                                                 <ul class="rating-list">
                                                     <li><i class="ion-star"></i></li>
                                                     <li><i class="ion-star"></i></li>
@@ -284,7 +284,7 @@
                                                     <li>Transmission: <span>{{ $car->transmission }}</span></li>
                                                 </ul>
                                                 <div class="listing-footer">
-                                                    <span><a href="#">Details</a></span>
+                                                    <span><a href="{{ route('detail',$car->id)  }}">Details</a></span>
                                                     <span>
                                                         Starting at <span class="price">${{ $car->price_perday }}</span> / day
                                                     </span>

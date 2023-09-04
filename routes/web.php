@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,29 +17,48 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/home', [HomeController::class, 'home'])->name('home');
+Route::permanentRedirect('/', '/home');
 
-Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::middleware('language')->group(function (){
 
-Route::controller(AuthController::class)->group(function () {
-    Route::get('/registration' , 'registration')
-        ->name('registration');
+    Route::prefix('{lang?}')->group(function (){
+        Route::get('/home', [HomeController::class, 'home'])->name('home');
+    });
 
-    Route::post('/login', 'login')
-        ->name('login');
+    Route::controller(AuthController::class)->group(function () {
+        Route::get('/registration' , 'registration')
+            ->name('registration');
 
-    Route::post('/register', 'register')
-        ->name('register');
+        Route::post('/login', 'login')
+            ->name('login');
 
-    Route::get('/logout', 'logout')
-        ->name('logout');
+        Route::post('/register', 'register')
+            ->name('register');
+
+        Route::get('/logout', 'logout')
+            ->name('logout');
+    });
+
+    Route::get('/profile', )->name('profile');
+
+    Route::controller(CarController::class)->group(function () {
+        Route::get('/cars', 'index')
+            ->name('cars');
+
+        Route::get('/list-cars', 'list')
+            ->name('list.cars');
+
+        Route::get('/car-detail/{id}', 'detail')
+            ->name('detail');
+
+        Route::get('/book', 'book')
+            ->name('book');
+    });
+
 });
 
-Route::get('/profile', )->name('profile');
 
-Route::controller(CarController::class)->group(function () {
-    Route::get('/cars', 'index')
-        ->name('cars');
 
-    Route::get('/list-cars', 'list')
-        ->name('list.cars');
-});
+
+

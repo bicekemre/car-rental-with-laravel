@@ -28,7 +28,6 @@
     <header class="header index-two-header">
         @yield('header')
         @yield('navbar')
-
     </header> <!-- end header -->
     @yield('content')
 </div> <!-- end #main-wrapper -->

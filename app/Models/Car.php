@@ -15,4 +15,9 @@ class Car extends Model
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    public function features()
+    {
+        return $this->hasMany(Features::class, 'car_id', 'id');
+    }
 }

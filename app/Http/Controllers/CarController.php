@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Location;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
@@ -11,8 +12,9 @@ class CarController extends Controller
     public function index()
     {
         $cars = Car::all();
+        $locations  = Location::all();
 
-        return view('cars.index', compact('cars'));
+        return view('cars.index', compact('cars','locations'));
     }
 
 
@@ -30,11 +32,28 @@ class CarController extends Controller
 
         $cars = Car::where([
             'location_id' => $request->location_id,
+            'class' => $request->car_type,
         ])->whereNotIn('id', $carIdsToExclude)->get();
 
         $hasQuery = $request->q;
 
         return view('cars.index', compact('cars', 'hasQuery'));
+    }
+
+    public function detail($id)
+    {
+        $car = Car::find($id);
+
+        return view('cars.detail', compact('car'));
+    }
+
+    public function book()
+    {
+        if (auth()->user()){
+            return route('checkout');
+        }else{
+            return redirect()->route('registration');
+        }
     }
 
 }

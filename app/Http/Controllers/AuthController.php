@@ -11,16 +11,20 @@ class AuthController extends Controller
 {
     public function registration()
     {
+        if (auth()->check()) {
+            return redirect()->route('profile');
+        }
         return view('auth.login');
     }
 
     public function login(Request $request)
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->input('remember-me', false))) {
-            return redirect()->route('home');
+            return redirect()->back();
         } else {
             return back()->withErrors(['email' => 'Invalid credentials']);
         }
+
     }
 
     public function register(Request $request)

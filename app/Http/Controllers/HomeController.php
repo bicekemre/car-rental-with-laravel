@@ -12,9 +12,10 @@ class HomeController extends Controller
     public function home()
     {
         $locations = Location::all();
-        $carsCount = Car::all()->count();
+        $cars = Car::all();
+        $carsCount = $cars->count();
         $usersCount  = User::all()->count();
 
-        return view('home', compact('locations', 'carsCount', 'usersCount'));
+        return view('home', compact('locations', 'cars', 'carsCount', 'usersCount'));
     }
 }
