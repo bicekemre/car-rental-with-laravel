@@ -143,20 +143,6 @@
                                                 <li class="{{ $feature->is_set == 1 ? 'checked' : 'unchecked' }}">{{ $feature->name }}</li>
                                             @endforeach
                                         @endisset
-                                        <li class="unchecked">Child Seats</li>
-                                        <li class="checked">GPS</li>
-                                        <li class="checked">Language</li>
-                                        <li class="checked">Music</li>
-                                        <li class="checked">Seat Belts</li>
-                                        <li class="checked">Sleeping bags</li>
-                                        <li class="checked">Water</li>
-                                        <li class="checked">Bluetooth</li>
-                                        <li class="unchecked">Onboard computer</li>
-                                        <li class="checked">Audio Input</li>
-                                        <li class="unchecked">Long term tips</li>
-                                        <li class="checked">car kit</li>
-                                        <li class="checked">Remote central looking</li>
-                                        <li class="checked">climate control</li>
                                     </ul>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="listing_tab_hor_2">
@@ -206,20 +192,26 @@
                 </div>
             </div> <!-- .end rq-content-block -->
             <div class="rq-content-block gray-bg">
-                <div class="container">
-                    <div class="listing-page-title">
-                        <h3>Book Car Now</h3>
-                    </div>
-                    <div class="rq-car-booking-section">
-                        <div class="car-search">
-                            <form action="{{ route('list.cars') }}" method="GET" >
-                                <input type="hidden" name="q" value="true">
-                                <div class="">
+                <form action="{{ route('book') }}" method="get">
+                    <input type="hidden" name="car_id" value="{{ $car->id }}">
+                    <div class="container">
+                        <div class="listing-page-title">
+                            <h3>Book Car Now</h3>
+                            <div class="car-search">
+                                <div class="car-search">
                                     <div class="rq-search-container">
                                         <div class="rq-search-single">
                                             <div class="rq-search-content">
-                                                <span class="rq-search-heading">Location</span>
-                                                <select name="location_id" class="category-option">
+                                                <span class="rq-search-heading">Pick Up Location</span>
+                                                <select name="pickuo_location" class="category-option">
+                                                    <option selected value="{{ $car->location->id ?? ''}}" >{{ $car->location->name ?? ''}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="rq-search-single">
+                                            <div class="rq-search-content">
+                                                <span class="rq-search-heading">Return Location</span>
+                                                <select name="return_location" class="category-option">
                                                     <option value="0">Pick a location</option>
                                                     @isset($locations)
                                                         @foreach($locations as $location)
@@ -243,63 +235,24 @@
                                                 <i class="ion-chevron-down datepicker-arrow"></i>
                                             </div>
                                         </div>
-                                        <div class="rq-search-single">
-                                            <div class="rq-search-content last-child">
-                                                <span class="rq-search-heading">Car Type</span>
-                                                <select name="car_type" class="category-option">
-                                                    <option value="SUV">SUV</option>
-                                                    <option value="Electric">Electric</option>
-                                                    <option value="Sedan">Sedan</option>
-                                                </select>
-                                            </div>
-                                        </div>
                                         <div class="rq-search-single search-btn">
                                             <div class="rq-search-content">
-                                                <button type="submit" class="rq-btn rq-btn-primary fluid-btn">Search <i class="arrow_right"></i></button>
+                                                <button type="submit" class="rq-btn rq-btn-primary fluid-btn">Book Now <i class="arrow_right"></i></button>
                                             </div>
                                         </div>
-                                    </div> <!-- / .search-container -->
-                                </div>
-                            </form>
-                        </div>
-                        <div class="booking-details">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="booking-section-single">
-                                        <h3 class="section-title">Resources</h3>
-                                        <div class="section-adding-option">
-                                          <span class="rq-checkbox-secondary">
-                                            <input type="checkbox" id="option-one">
-                                            <label for="option-one">GPS <span>$14.00 - Per Day</span></label>
-                                          </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1"></div>
-                                <div class="col-md-6">
-                                    <div class="booking-section-single">
-                                        <h3 class="section-title">Security Deposites</h3>
-                                        <div class="section-adding-option">
-                                          <span class="rq-checkbox-secondary">
-                                            <input type="checkbox" id="option-four">
-                                            <label for="option-four">Personal Accident Insurance <span>$10.00 - Per Day</span></label>
-                                          </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <h3 class="total-price">Total Booking Cost : <span>$150.00</span></h3>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="book-btn">
-                                        <a href="{{ route('book') }}" class="rq-btn rq-btn-primary btn-large">Book Now <i class="ion-android-car"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-                </div>
+                </form>
             </div> <!-- /.rq-content-block -->
         </div>
     </div> <!-- /.page-content -->
+    @section('scripts')
+        <script>
+            initMapListing({{ $car->location->lat ?? ''}}, {{ $car->location->long ?? ''}});
+        </script>
+    @endsection
 @endsection

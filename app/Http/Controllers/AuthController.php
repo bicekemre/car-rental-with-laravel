@@ -20,7 +20,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->input('remember-me', false))) {
-            return redirect()->back();
+            return redirect()->route('home');
         } else {
             return back()->withErrors(['email' => 'Invalid credentials']);
         }

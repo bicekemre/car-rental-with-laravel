@@ -20,4 +20,9 @@ class Car extends Model
     {
         return $this->hasMany(Features::class, 'car_id', 'id');
     }
+
+    public function location()
+    {
+        return $this->hasOne(Location::class, 'id', 'location_id');
+    }
 }

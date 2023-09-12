@@ -24,6 +24,7 @@ Route::middleware('language')->group(function (){
 
     Route::prefix('{lang?}')->group(function (){
         Route::get('/home', [HomeController::class, 'home'])->name('home');
+
     });
 
     Route::controller(AuthController::class)->group(function () {

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Extra;
 use App\Models\Location;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use MongoDB\Driver\Session;
 
 class CarController extends Controller
 {
@@ -23,6 +25,8 @@ class CarController extends Controller
         $startDate = $request->input('pickup_date');
         $endDate = $request->input('return_date');
 
+        $locations  = Location::all();
+
         $reservations = Reservation::where('is_completed', 0)
             ->whereBetween('pickup_date', [$startDate, $endDate])
             ->orWhereBetween('return_date', [$startDate, $endDate])
@@ -37,23 +41,27 @@ class CarController extends Controller
 
         $hasQuery = $request->q;
 
-        return view('cars.index', compact('cars', 'hasQuery'));
+        return view('cars.index', compact('cars', 'hasQuery', 'locations'));
     }
 
     public function detail($id)
     {
         $car = Car::find($id);
+        $extras = Extra::all();
+        $locations = Location::all();
 
-        return view('cars.detail', compact('car'));
+        return view('cars.detail', compact('car', 'extras', 'locations'));
     }
 
-    public function book()
+    public function book(Request $request)
     {
-        if (auth()->user()){
-            return route('checkout');
-        }else{
-            return redirect()->route('registration');
-        }
+        $car = Car::find($request->car_id);
+        $return_location = Location::find($request->return_location);
+
+        $locations = Location::all();
+
+
+        return view('checkout',compact('request', 'car', 'locations', 'return_location'));
     }
 
 }

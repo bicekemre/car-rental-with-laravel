@@ -295,7 +295,6 @@
                                     </div>
                                 @endforeach
                             @endisset
-
                         </div>
                     </div>
                     <div class="rq-pagination">

@@ -55,5 +55,7 @@
 <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/scripts.js') }}" ></script>
+<script type="text/javascript" src="{{ asset('js/mapdetails.js') }}" ></script>
+@yield('script')
 </body>
 </html>
