@@ -5,6 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * @property string  $brand
+ * @property string  $model
+ * @property numeric $mil
+ * @property string  $transmission
+ * @property string  $seats
+ * @property string  $luggage
+ * @property string  $fuel_type
+ * @property string  $fuel_amount
+ * @property string  $class
+ * @property string  $desc
+ * @property numeric $year
+ * @property numeric $type
+ * @property int     $location_id
+ * @property string  $price_perday
+ */
+
+
 class Car extends Model
 {
     use HasFactory;

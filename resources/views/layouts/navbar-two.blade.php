@@ -31,16 +31,16 @@
                     <a href="/about-us">{{ __('about-us') }}</a>
                 </li>
                 @if(auth()->user())
-                <li class=""><a href="{{ route('profile') }}">
-                        {{ __('profile') }}</a>
-                </li>
-                <li class=""><a href="{{ route('logout') }}">
-                        {{ __('log out') }}</a>
-                </li>
+                    <li class=""><a href="{{ route('profile') }}">
+                            {{ __('profile') }}</a>
+                    </li>
+                    <li class=""><a href="{{ route('logout') }}">
+                            {{ __('log out') }}</a>
+                    </li>
                 @else
-                <li class="login-register-link right-side-link"><a href="{{ route('registration') }}">
-                        <i class="icon_lock-open_alt"></i>Login</a>
-                </li>
+                    <li class="login-register-link right-side-link"><a href="{{ route('registration') }}">
+                            <i class="icon_lock-open_alt"></i>Login</a>
+                    </li>
                 @endif
                 <li class="dropdown right-side-link">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
