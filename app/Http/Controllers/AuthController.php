@@ -20,7 +20,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->input('remember-me', false))) {
-            if (request()->hasCookie('request_data')) {
+            if (isset($_COOKIE['request_data'])) {
                 return redirect()->route('book');
             }else{
                 return redirect()->route('home');

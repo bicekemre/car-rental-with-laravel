@@ -57,23 +57,22 @@ class CarController extends Controller
     public function book(Request $request)
     {
         if ($request->isMethod('post')) {
-
             $requestData = $request->all();
-            $cookie = cookie('request_data', json_encode($requestData), 15);
+            //$cookie = cookie('request_data', json_encode($requestData), 15);
+            setcookie('request_data', json_encode($requestData), time() + 900);
         }
 
         if (!auth()->check()) {
             return redirect()->route('registration');
         }
 
-        $cookieData = json_decode(cookie('request_data')->getValue());
+        $cookieData = json_decode($_COOKIE['request_data']);
 
         $car = Car::find($cookieData->car_id);
         $return_location = Location::find($cookieData->return_location);
         $locations = Location::all();
 
-        return view('checkout', compact('cookieData', 'car', 'locations', 'return_location'))
-            ->withCookie($cookie);
+        return view('checkout', compact('cookieData', 'car', 'locations', 'return_location'));
     }
 
 
