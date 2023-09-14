@@ -129,7 +129,8 @@
                 </div>
             </div> <!-- .end rq-content-block -->
             <div class="rq-content-block gray-bg">
-                <form action="{{ route('book') }}" method="get">
+                <form action="{{ route('book') }}" method="post">
+                    @csrf
                     <input type="hidden" name="car_id" value="{{ $car->id }}">
                     <div class="container">
                         <div class="listing-page-title">
@@ -140,7 +141,7 @@
                                         <div class="rq-search-single">
                                             <div class="rq-search-content">
                                                 <span class="rq-search-heading">Pick Up Location</span>
-                                                <select name="pickuo_location" class="category-option">
+                                                <select name="pickup_location" class="category-option">
                                                     <option selected value="{{ $car->location->id ?? ''}}" >{{ $car->location->name ?? ''}}</option>
                                                 </select>
                                             </div>
@@ -187,9 +188,18 @@
             </div> <!-- /.rq-content-block -->
         </div>
     </div> <!-- /.page-content -->
-    @section('scripts')
-        <script>
-            initMapListing({{ $car->location->lat ?? ''}}, {{ $car->location->long ?? ''}});
-        </script>
-    @endsection
+@endsection
+@section('scripts')
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0QI6vd531_4xsTobCg_J1_6BZOEolRbs&libraries=visualization&callback=initMapListing">
+    </script>
+    <script>
+        function initMapListing(lat, long) {
+            var myLatLng = {lat: {{ $car->location->lat }}, long: {{ $car->location->long}}};
+            var map = new google.maps.Map(document.getElementById('listing-map'), {
+                zoom: 15,
+                center: myLatLng,
+                scrollwheel: false
+            });
+        }
+    </script>
 @endsection

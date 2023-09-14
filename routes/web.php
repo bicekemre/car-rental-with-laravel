@@ -39,9 +39,11 @@ Route::middleware('language')->group(function (){
 
         Route::get('/logout', 'logout')
             ->name('logout');
+
+        Route::get('/profile', 'profile')->name('profile');
+
     });
 
-    Route::get('/profile', )->name('profile');
 
     Route::controller(CarController::class)->group(function () {
         Route::get('/cars', 'index')
@@ -55,6 +57,11 @@ Route::middleware('language')->group(function (){
 
         Route::get('/book', 'book')
             ->name('book');
+
+        Route::post('/book', 'book')
+            ->name('book');
+
+
     });
 
 });

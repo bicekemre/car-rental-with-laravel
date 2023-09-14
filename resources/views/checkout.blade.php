@@ -18,69 +18,42 @@
                     <div class="container">
                         <div class="row">
                             <div class="panel-group" id="checkout-accordion" role="tablist" aria-multiselectable="true">
-                                @if(auth()->check())
+                                @if(auth()->check() == 0)
                                     <div class="panel panel-default">
                                         <div class="panel-heading" role="tab" id="checkout-method-heading">
                                             <h4 class="panel-title">
                                                 <a role="button" data-toggle="collapse" data-parent="#checkout-accordion" href="#checkout-method" aria-expanded="true" aria-controls="checkout-method">
-                                                    Checkout Method
+                                                    Login
                                                 </a>
                                             </h4>
                                         </div> <!-- end .panel-heading -->
                                         <div id="checkout-method" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="checkout-method-heading">
                                             <div class="panel-body">
                                                 <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="panel-subtitle">
-                                                            <h5>Check as a guest or register</h5>
-                                                            <p>Register with us for future convenience:</p>
-                                                        </div>
-                                                        <div class="rq-radiobox-content">
-                                                            <span class="rq-radiobox">
-                                                              <input type="radio" name="checkout-login-method" id="checkout-login-method" value="guest" checked>
-                                                              <label for="checkout-login-method">Check as guest</label>
-                                                            </span>
-                                                                                <span class="rq-radiobox">
-                                                              <input checked type="radio" name="checkout-login-method" id="checkout-login-method-two" value="guest">
-                                                              <label for="checkout-login-method-two">Register</label>
-                                                            </span>
-                                                        </div>
-                                                        <div class="panel-subtitle">
-                                                            <h5>Register and save time !</h5>
-                                                            <p>Register with us for future convenience:</p>
-                                                        </div>
-
-                                                        <div class="widget-categories">
-                                                            <ul>
-                                                                <li>Fast and easy check out</li>
-                                                                <li>Easy access to your order history and status</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="guest-btn">
-                                                            <button class="rq-btn rq-btn-transparent">Continue</button>
-                                                        </div>
-                                                    </div> <!-- end .col-md-6 -->
-                                                    <div class="col-md-6">
-                                                        <div class="panel-subtitle">
-                                                            <h5>Already Registered ?</h5>
-                                                            <p>Please login below :</p>
-                                                        </div>
-                                                        <form action="#" class="rq-checkout-form">
-                                                            <div class="form-group">
-                                                                <label for="login-email">Email Address <span class="required">*</span></label>
-                                                                <input type="email" class="rq-form-control small" id="login-email" placeholder="Email">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="login-password">Password <span class="required">*</span></label>
-                                                                <input type="password" class="rq-form-control small" id="login-password" placeholder="Password">
-                                                            </div>
-                                                            <span class="required">* Required Fields</span>
-                                                            <div class="login-button">
-                                                                <a href="#">Forgot Your Password ?</a>
-                                                                <button type="submit" class="rq-btn rq-btn-primary btn-large">Log In</button>
-                                                            </div>
-                                                        </form>
-                                                    </div> <!-- end .col-md-6 -->
+                                                    <form action="{{ route('login') }}" method="POST">
+                                                        @csrf
+                                                            <div class="col-md-6">
+                                                                <div class="panel-subtitle">
+                                                                    <h5>Already Registered ?</h5>
+                                                                    <p>Please login below :</p>
+                                                                </div>
+                                                                <form action="#" class="rq-checkout-form">
+                                                                    <div class="form-group">
+                                                                        <label for="login-email">Email Address <span class="required">*</span></label>
+                                                                        <input type="email" name="email" class="rq-form-control small" id="login-email" placeholder="Email">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="login-password">Password <span class="required">*</span></label>
+                                                                        <input type="password" name="password" class="rq-form-control small" id="login-password" placeholder="Password">
+                                                                    </div>
+                                                                    <span class="required">* Required Fields</span>
+                                                                    <div class="login-button">
+                                                                        <a href="#">Forgot Your Password ?</a>
+                                                                        <button type="submit" class="rq-btn rq-btn-primary btn-large">Log In</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div> <!-- end .col-md-6 -->
+                                                    </form>
                                                 </div>
                                             </div> <!-- end .panel-body -->
                                         </div> <!-- end .panel-collapse -->
@@ -187,14 +160,14 @@
                                                         <div class="rq-search-single">
                                                             <div class="rq-search-content">
                                                                 <span class="rq-search-heading">Pick up</span>
-                                                                <input type="text" name="pickup_date" value="{{ $request->pickup_date }}" class="rq-form-element datepicker" id="startdate" placeholder="Pick up date"/>
+                                                                <input type="text" name="pickup_date" value="{{ $cookieData->pickup_date }}" class="rq-form-element datepicker" id="startdate" placeholder="Pick up date"/>
                                                                 <i class="ion-chevron-down datepicker-arrow"></i>
                                                             </div>
                                                         </div>
                                                         <div class="rq-search-single">
                                                             <div class="rq-search-content">
                                                                 <span class="rq-search-heading">Return</span>
-                                                                <input type="text" name="return_date" value="{{ $request->return_date }}" class="rq-form-element" id="enddate" placeholder="Return date"/>
+                                                                <input type="text" name="return_date" value="{{ $cookieData->return_date }}" class="rq-form-element" id="enddate" placeholder="Return date"/>
                                                                 <i class="ion-chevron-down datepicker-arrow"></i>
                                                             </div>
                                                         </div>

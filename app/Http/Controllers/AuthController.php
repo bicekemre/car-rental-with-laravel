@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     public function registration()
     {
-        if (auth()->check()) {
+        if (auth()->check() == 1) {
             return redirect()->route('profile');
         }
         return view('auth.login');
@@ -20,7 +20,11 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->input('remember-me', false))) {
-            return redirect()->route('home');
+            if (request()->hasCookie('request_data')) {
+                return redirect()->route('book');
+            }else{
+                return redirect()->route('home');
+            }
         } else {
             return back()->withErrors(['email' => 'Invalid credentials']);
         }
@@ -41,7 +45,16 @@ class AuthController extends Controller
 
         auth()->login($user);
 
-        return redirect()->route('home');
+        if (\request()->hasCookie('request_data')) {
+            return redirect()->route('book');
+        }else{
+            return redirect()->route('home');
+        }
+    }
+
+    public function profile()
+    {
+        return view('profile');
     }
 
     public function logout()
