@@ -33,7 +33,7 @@
                                             <option value="0">Pick a location</option>
                                             @isset($locations)
                                                 @foreach($locations as $location)
-                                                    <option value="{{ $location->id }}">{{ $location->name }}</option>
+                                                    <option {{ request()->get('location_id') == $location->id ? 'selected' : ''  }} value="{{ $location->id }}">{{ $location->name }}</option>
                                                 @endforeach
                                             @endisset
                                         </select>
@@ -42,14 +42,14 @@
                                 <div class="rq-search-single">
                                     <div class="rq-search-content">
                                         <span class="rq-search-heading">Pick up</span>
-                                        <input type="text" name="pickup_date" class="rq-form-element datepicker" id="startdate" placeholder="Pick up date"/>
+                                        <input type="text" name="pickup_date" value="{{ request()->get('pickup_date') }}" class="rq-form-element datepicker" id="startdate" placeholder="Pick up date"/>
                                         <i class="ion-chevron-down datepicker-arrow"></i>
                                     </div>
                                 </div>
                                 <div class="rq-search-single">
                                     <div class="rq-search-content">
                                         <span class="rq-search-heading">Return</span>
-                                        <input type="text" name="return_date" class="rq-form-element" id="enddate" placeholder="Return date"/>
+                                        <input type="text" name="return_date" class="rq-form-element" value="{{ request()->get('return_date') }}" id="enddate" placeholder="Return date"/>
                                         <i class="ion-chevron-down datepicker-arrow"></i>
                                     </div>
                                 </div>
@@ -57,9 +57,9 @@
                                     <div class="rq-search-content last-child">
                                         <span class="rq-search-heading">Car Type</span>
                                         <select name="car_type" class="category-option">
-                                            <option value="SUV">SUV</option>
-                                            <option value="Electric">Electric</option>
-                                            <option value="Sedan">Sedan</option>
+                                            <option {{ request()->get('car_type') == 'SUV' ? 'selected' : ''  }} value="SUV">SUV</option>
+                                            <option {{ request()->get('car_type') == 'Electric' ? 'selected' : ''  }} value="Electric">Electric</option>
+                                            <option {{ request()->get('car_type') == 'Sedan' ? 'selected' : ''  }} value="Sedan">Sedan</option>
                                         </select>
                                     </div>
                                 </div>
