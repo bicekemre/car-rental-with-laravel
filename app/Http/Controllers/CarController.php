@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Card;
 use App\Models\Extra;
+use App\Models\Invoice;
 use App\Models\Location;
 use App\Models\Reservation;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-use MongoDB\Driver\Session;
+use Carbon\Carbon;
 
 class CarController extends Controller
 {
@@ -58,7 +60,6 @@ class CarController extends Controller
     {
         if ($request->isMethod('post')) {
             $requestData = $request->all();
-            //$cookie = cookie('request_data', json_encode($requestData), 15);
             setcookie('request_data', json_encode($requestData), time() + 900);
         }
 
@@ -69,10 +70,68 @@ class CarController extends Controller
         $cookieData = json_decode($_COOKIE['request_data']);
 
         $car = Car::find($cookieData->car_id);
+
+        $pickupDate = Carbon::createFromFormat('m/d/Y', $cookieData->pickup_date);
+        $returnDate = Carbon::createFromFormat('m/d/Y', $cookieData->return_date);
+
+        $dayAmount = $pickupDate->diffInDays($returnDate);
+
+        $totalPrice = $dayAmount * $car->price_perday;
+
+
+
         $return_location = Location::find($cookieData->return_location);
         $locations = Location::all();
 
-        return view('checkout', compact('cookieData', 'car', 'locations', 'return_location'));
+        return view('checkout', compact('cookieData',
+            'car',
+            'locations',
+            'return_location',
+            'totalPrice'
+        ));
+    }
+
+    public function reserve(Request $request)
+    {
+        $user_id = auth()->user()->getAuthIdentifier();
+
+        $reservation = new Reservation();
+
+        $reservation->user_id = $user_id;
+        $reservation->car_id = $request->car_id;
+        $reservation->pickup_date = $request->pickup_date;
+        $reservation->return_date = $request->return_date;
+        $reservation->pickup_location = $request->pickup_location;
+        $reservation->return_location = $request->return_location;
+        $reservation->price = $request->price;
+        $reservation->is_completed = 0;
+
+        $reservation->save();
+
+
+        $invoice = new Invoice();
+
+        $invoice->reservation_id = $reservation->id;
+        $invoice->name = $request->billing_name;
+        $invoice->address = $request->billing_address;
+        $invoice->city = $request->billing_city;
+        $invoice->zip = $request->billing_zip;
+
+        $invoice->save();
+
+
+        $card = new Card();
+
+        $card->user_id = $user_id;
+        $card->name_surname = $request->name_surname;
+        $card->number = $request->credit_card;
+        $card->expration_date = $request->expration_date;
+        $card->cvv = $request->cvv;
+
+        $card->save();
+
+
+        return redirect()->route('profile');
     }
 
 

@@ -45,7 +45,7 @@ class AuthController extends Controller
 
         auth()->login($user);
 
-        if (\request()->hasCookie('request_data')) {
+        if (isset($_COOKIE['request_data'])) {
             return redirect()->route('book');
         }else{
             return redirect()->route('home');

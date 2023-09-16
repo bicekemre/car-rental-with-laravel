@@ -15,176 +15,146 @@
                     </ol>
                 </div> <!-- end .rq-title-container -->
                 <div class="rq-checkout-wrapper">
-                    <div class="container">
-                        <div class="row">
-                            <div class="panel-group" id="checkout-accordion" role="tablist" aria-multiselectable="true">
-                                @if(auth()->check() == 0)
+                    <form action="{{ route('reserve') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="car_id" value="{{ $car->id }}">
+                        <div class="container">
+                            <div class="row">
+                                <div class="panel-group" id="checkout-accordion" role="tablist" aria-multiselectable="true">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="checkout-method-heading">
+                                        <div class="panel-heading" role="tab" id="billing-information-heading">
                                             <h4 class="panel-title">
-                                                <a role="button" data-toggle="collapse" data-parent="#checkout-accordion" href="#checkout-method" aria-expanded="true" aria-controls="checkout-method">
-                                                    Login
+                                                <a role="button" data-toggle="collapse" data-parent="#checkout-accordion" href="#billing-information" aria-expanded="true" aria-controls="billing-information">
+                                                    Billing Information
                                                 </a>
                                             </h4>
                                         </div> <!-- end .panel-heading -->
-                                        <div id="checkout-method" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="checkout-method-heading">
+                                        <div id="billing-information" class="panel-collapse collapse" role="tabpanel" aria-labelledby="billing-information-heading">
                                             <div class="panel-body">
-                                                <div class="row">
-                                                    <form action="{{ route('login') }}" method="POST">
-                                                        @csrf
-                                                            <div class="col-md-6">
-                                                                <div class="panel-subtitle">
-                                                                    <h5>Already Registered ?</h5>
-                                                                    <p>Please login below :</p>
-                                                                </div>
-                                                                <form action="#" class="rq-checkout-form">
-                                                                    <div class="form-group">
-                                                                        <label for="login-email">Email Address <span class="required">*</span></label>
-                                                                        <input type="email" name="email" class="rq-form-control small" id="login-email" placeholder="Email">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="login-password">Password <span class="required">*</span></label>
-                                                                        <input type="password" name="password" class="rq-form-control small" id="login-password" placeholder="Password">
-                                                                    </div>
-                                                                    <span class="required">* Required Fields</span>
-                                                                    <div class="login-button">
-                                                                        <a href="#">Forgot Your Password ?</a>
-                                                                        <button type="submit" class="rq-btn rq-btn-primary btn-large">Log In</button>
-                                                                    </div>
-                                                                </form>
-                                                            </div> <!-- end .col-md-6 -->
-                                                    </form>
+                                                <div class="rq-login-form no-border">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input type="text" id="billing-name" class="rq-form-control reverse" name="billing_name" placeholder="name and surname" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" id="billing-address" class="rq-form-control reverse" name="billing_address" placeholder="Address" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" id="billing-city" name="billing_city" class="rq-form-control reverse" placeholder="City" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" id="billing-zip" name="billing_zip" class="rq-form-control reverse" placeholder="Zip Code" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="tel" id="billing-phone" name="billing_phone" class="rq-form-control reverse" placeholder="Phone" required>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div> <!-- end .panel-body -->
                                         </div> <!-- end .panel-collapse -->
                                     </div> <!-- end .panel-default -->
-                                @endif
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="billing-information-heading">
-                                        <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#checkout-accordion" href="#billing-information" aria-expanded="true" aria-controls="billing-information">
-                                                Billing Information
-                                            </a>
-                                        </h4>
-                                    </div> <!-- end .panel-heading -->
-                                    <div id="billing-information" class="panel-collapse collapse" role="tabpanel" aria-labelledby="billing-information-heading">
-                                        <div class="panel-body">
-                                            <div class="rq-login-form no-border">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <input type="text" id="billing-name" class="rq-form-control reverse" name="billing-name" placeholder="name and surname" required>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="text" id="billing-address" class="rq-form-control reverse" name="billing-address" placeholder="Address" required>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="text" id="billing-city" name="billing-city" class="rq-form-control reverse" placeholder="City" required>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="text" id="billing-zip" name="billing-zip" class="rq-form-control reverse" placeholder="Zip Code" required>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="tel" id="billing-phone" name="billing-phone" class="rq-form-control reverse" placeholder="Phone" required>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="payment-information-heading">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#checkout-accordion" href="#payment-information" aria-expanded="true" aria-controls="payment-information">
+                                                    Payment Information
+                                                </a>
+                                            </h4>
+                                        </div> <!-- end .panel-heading -->
+                                        <div id="payment-information" class="panel-collapse collapse" role="tabpanel" aria-labelledby="payment-information-heading">
+                                            <div class="panel-body">
+                                                <div class="rq-login-form no-border">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input type="text" id="name-surname" name="name_surname" class="rq-form-control reverse"  placeholder="Name surname" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" id="credit-card" name="credit_card" class="rq-form-control reverse"  placeholder="Credit Card" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" id="expiration-date" name="expiration_date" class="rq-form-control reverse"  placeholder="Expiration date" required>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text"  id="cvv" name="cvv"  class="rq-form-control reverse" placeholder="CVV" required>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div> <!-- end .panel-body -->
-                                    </div> <!-- end .panel-collapse -->
-                                </div> <!-- end .panel-default -->
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="payment-information-heading">
-                                        <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#checkout-accordion" href="#payment-information" aria-expanded="true" aria-controls="payment-information">
-                                                Payment Information
-                                            </a>
-                                        </h4>
-                                    </div> <!-- end .panel-heading -->
-                                    <div id="payment-information" class="panel-collapse collapse" role="tabpanel" aria-labelledby="payment-information-heading">
-                                        <div class="panel-body">
-                                            <div class="rq-login-form no-border">
+                                            </div> <!-- end .panel-body -->
+                                        </div> <!-- end .panel-collapse -->
+                                    </div> <!-- end .panel-default -->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="order-review-heading">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#checkout-accordion" href="#order-review" aria-expanded="true" aria-controls="order-review">
+                                                    Order Review
+                                                </a>
+                                            </h4>
+                                        </div> <!-- end .panel-heading -->
+                                        <div id="order-review" class="panel-collapse collapse" role="tabpanel" aria-labelledby="order-review-heading">
+                                            <div class="panel-body">
                                                 <div class="row">
-                                                    <div class="col-md-6">
-                                                        <input type="text" id="credit-card" name="credit-card" class="rq-form-control reverse"  placeholder="Credit Card" required>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="text" id="expiration-date" name="expiration-date" class="rq-form-control reverse"  placeholder="Expiration date" required>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="text"  id="cvv" name="cvv"  class="rq-form-control reverse" placeholder="CVV" required>
-                                                    </div>
+                                                    {{ $car->desc }}
                                                 </div>
-                                            </div>
-                                        </div> <!-- end .panel-body -->
-                                    </div> <!-- end .panel-collapse -->
-                                </div> <!-- end .panel-default -->
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="order-review-heading">
-                                        <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#checkout-accordion" href="#order-review" aria-expanded="true" aria-controls="order-review">
-                                                Order Review
-                                            </a>
-                                        </h4>
-                                    </div> <!-- end .panel-heading -->
-                                    <div id="order-review" class="panel-collapse collapse" role="tabpanel" aria-labelledby="order-review-heading">
-                                        <div class="panel-body">
-                                            <div class="row">
-                                                {{ $car->desc }}
-                                            </div>
-                                            <div class="car-search">
+                                                <div class="row">
+                                                    <h4> Total Price =   ${{ $totalPrice }}</h4>
+                                                    <input type="hidden" name="price" value="{{ $totalPrice }}">
+                                                </div>
                                                 <div class="car-search">
-                                                    <div class="rq-search-container">
-                                                        <div class="rq-search-single">
-                                                            <div class="rq-search-content">
-                                                                <span class="rq-search-heading">Pick Up Location</span>
-                                                                <select name="pickuo_location" class="category-option">
-                                                                    <option selected value="{{ $car->location->id ?? ''}}" >{{ $car->location->name ?? ''}}</option>
-                                                                </select>
+                                                    <div class="car-search">
+                                                        <div class="rq-search-container">
+                                                            <div class="rq-search-single">
+                                                                <div class="rq-search-content">
+                                                                    <span class="rq-search-heading">Pick Up Location</span>
+                                                                    <select name="pickuo_location" class="category-option">
+                                                                        <option selected value="{{ $car->location->id ?? ''}}" >{{ $car->location->name ?? ''}}</option>
+                                                                    </select>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="rq-search-single">
-                                                            <div class="rq-search-content">
-                                                                <span class="rq-search-heading">Return Location</span>
-                                                                <select name="return_location" value="" class="category-option">
-                                                                    <option value="0">Pick a location</option>
-                                                                    @isset($return_location)
-                                                                        <option selected value="{{ $return_location->id }}">{{ $return_location->name }}</option>
-                                                                    @endisset
-                                                                    @isset($locations)
-                                                                        @foreach($locations as $location)
-                                                                            <option value="{{ $location->id }}">{{ $location->name }}</option>
-                                                                        @endforeach
-                                                                    @endisset
-                                                                </select>
+                                                            <div class="rq-search-single">
+                                                                <div class="rq-search-content">
+                                                                    <span class="rq-search-heading">Return Location</span>
+                                                                    <select name="return_location" value="" class="category-option">
+                                                                        <option value="0">Pick a location</option>
+                                                                        @isset($return_location)
+                                                                            <option selected value="{{ $return_location->id }}">{{ $return_location->name }}</option>
+                                                                        @endisset
+                                                                        @isset($locations)
+                                                                            @foreach($locations as $location)
+                                                                                <option value="{{ $location->id }}">{{ $location->name }}</option>
+                                                                            @endforeach
+                                                                        @endisset
+                                                                    </select>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="rq-search-single">
-                                                            <div class="rq-search-content">
-                                                                <span class="rq-search-heading">Pick up</span>
-                                                                <input type="text" name="pickup_date" value="{{ $cookieData->pickup_date }}" class="rq-form-element datepicker" id="startdate" placeholder="Pick up date"/>
-                                                                <i class="ion-chevron-down datepicker-arrow"></i>
+                                                            <div class="rq-search-single">
+                                                                <div class="rq-search-content">
+                                                                    <span class="rq-search-heading">Pick up</span>
+                                                                    <input type="text" name="pickup_date" value="{{ $cookieData->pickup_date }}" class="rq-form-element datepicker" id="startdate" placeholder="Pick up date"/>
+                                                                    <i class="ion-chevron-down datepicker-arrow"></i>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="rq-search-single">
-                                                            <div class="rq-search-content">
-                                                                <span class="rq-search-heading">Return</span>
-                                                                <input type="text" name="return_date" value="{{ $cookieData->return_date }}" class="rq-form-element" id="enddate" placeholder="Return date"/>
-                                                                <i class="ion-chevron-down datepicker-arrow"></i>
+                                                            <div class="rq-search-single">
+                                                                <div class="rq-search-content">
+                                                                    <span class="rq-search-heading">Return</span>
+                                                                    <input type="text" name="return_date" value="{{ $cookieData->return_date }}" class="rq-form-element" id="enddate" placeholder="Return date"/>
+                                                                    <i class="ion-chevron-down datepicker-arrow"></i>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="rq-search-single search-btn">
-                                                            <div class="rq-search-content">
-                                                                <button type="submit" class="rq-btn rq-btn-primary fluid-btn">Book Now <i class="arrow_right"></i></button>
+                                                            <div class="rq-search-single search-btn">
+                                                                <div class="rq-search-content">
+                                                                    <button type="submit" class="rq-btn rq-btn-primary fluid-btn">Book Now <i class="arrow_right"></i></button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div> <!-- end .panel-body -->
-                                    </div> <!-- end .panel-collapse -->
-                                </div> <!-- end .panel-default -->
-                            </div> <!-- end #accordion -->
-                        </div> <!-- end .row -->
-                    </div> <!-- end .container -->
+                                            </div> <!-- end .panel-body -->
+                                        </div> <!-- end .panel-collapse -->
+                                    </div> <!-- end .panel-default -->
+                                </div> <!-- end #accordion -->
+                            </div> <!-- end .row -->
+                        </div> <!-- end .container -->
+                    </form>
                 </div> <!-- end .rq-element-wrapper -->
             </div> <!-- end .container -->
         </div> <!-- end .rq-content-block -->

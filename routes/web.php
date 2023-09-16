@@ -64,6 +64,8 @@ Route::middleware('language')->group(function (){
 
     });
 
+    Route::get('/reserve', [CarController::class, 'reserve'])->name('reserve');
+
 });
 
 
