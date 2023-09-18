@@ -207,7 +207,7 @@
                                             </div>
                                             <div class="listing-details">
                                                 <h5 class="car-brand">{{ $car->brand }}</h5>
-                                                <h3 class="car-name"><a href="{{ route('detail',$car->id)  }}">{{ $car->brand . ' ' . $car->model}}</a></h3>
+                                                <h3 class="car-name"><a href="{{ route('detail',['id' => $car->id, 'lang' => app()->getLocale()])  }}">{{ $car->brand . ' ' . $car->model}}</a></h3>
                                                 <ul class="rating-list">
                                                     <li><i class="ion-star"></i></li>
                                                     <li><i class="ion-star"></i></li>
@@ -221,7 +221,7 @@
                                                     <li>Transmission: <span>{{ $car->transmission }}</span></li>
                                                 </ul>
                                                 <div class="listing-footer">
-                                                    <span><a href="{{ route('detail',$car->id)  }}">Details</a></span>
+                                                    <span><a href="{{ route('detail',['id' => $car->id, 'lang' => app()->getLocale()])  }}">Details</a></span>
                                                     <span>
                                                         Starting at <span class="price">${{ $car->price_perday }}</span> / day
                                                     </span>

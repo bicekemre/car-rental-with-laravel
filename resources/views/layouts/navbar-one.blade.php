@@ -16,13 +16,13 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="/">{{ __('navbar.home') }}</a>
+                    <a href="{{ route('home',  app()->getLocale()) }}">{{ __('navbar.home') }}</a>
                 </li>
                 <li class="">
-                    <a href="/cars">{{ __('navbar.cars') }}</a>
+                    <a href="{{ route('cars') }}">{{ __('navbar.cars') }}</a>
                 </li>
                 <li class="">
-                    <a href="/blog">{{ __('navbar.blog') }}</a>
+                    <a href="">{{ __('navbar.blog') }}</a>
                 </li>
                 <li class="">
                     <a href="/about-us">{{ __('navbar.about us') }}</a>
@@ -41,16 +41,22 @@
                             {{ __('navbar.logout') }}</a>
                     </li>
                 @else
-                    <li class="login-register-link"><a href="{{ route('registration') }}">
+                    <li class="login-register-link"><a href="{{ route('registration', app()->getLocale()) }}">
                             {{ __('navbar.login') }}</a>
                     </li>
                 @endif
                 <li class="dropdown">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false">{{ app()->getLocale() }}<span class="ion-chevron-down"></span></a>
-                    <ul class="dropdown-menu with-language">
-                        <li><a rel="alternate" hreflang="tr" href="">TR</a></li>
-                    </ul>
+                    @if(app()->getLocale() == 'en')
+                        <ul class="dropdown-menu with-language">
+                            <li><a rel="alternate" hreflang="tr" href="{{ route(request()->route()->getName(),['lang'  => 'tr']) }}">TR</a></li>
+                        </ul>
+                    @elseif(app()->getLocale() == 'tr')
+                        <ul class="dropdown-menu with-language">
+                            <li><a rel="alternate" hreflang="tr" href="{{ route(request()->route()->getName(),['lang'  => 'en']) }}">EN</a></li>
+                        </ul>
+                    @endif
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->

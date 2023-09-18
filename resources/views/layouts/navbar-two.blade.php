@@ -9,54 +9,51 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('./img/company-logo.png') }}" alt=""/></a>
+            <a class="navbar-brand" href="{{ route('home', app()->getLocale()) }}"><img src="{{ asset('./img/company-logo.png') }}" alt=""/></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li class="active">
-                    <a href="/">{{ __('home') }}</a>
+                    <a href="{{ route('home', app()->getLocale()) }}">{{ __('navbar.home') }}</a>
                 </li>
                 <li class="">
-                    <a href="/cars">{{ __('cars') }}</a>
+                    <a href="{{ route('cars', app()->getLocale()) }}">{{ __('navbar.cars') }}</a>
                 </li>
                 <li class="">
-                    <a href="/blog">{{ __('blog') }}</a>
+                    <a href="/blog">{{ __('navbar.blog') }}</a>
                 </li>
                 <li class="">
-                    <a href="/contact">{{ __('contact') }}</a>
+                    <a href="/contact">{{ __('navbar.contact') }}</a>
                 </li>
                 <li class="">
-                    <a href="/about-us">{{ __('about-us') }}</a>
+                    <a href="/about-us">{{ __('navbar.about us') }}</a>
                 </li>
                 @if(auth()->user())
                     <li class=""><a href="{{ route('profile') }}">
-                            {{ __('profile') }}</a>
+                            {{ __('navbar.profile') }}</a>
                     </li>
                     <li class=""><a href="{{ route('logout') }}">
-                            {{ __('log out') }}</a>
+                            {{ __('navbar.log out') }}</a>
                     </li>
                 @else
                     <li class="login-register-link right-side-link"><a href="{{ route('registration') }}">
                             <i class="icon_lock-open_alt"></i>Login</a>
                     </li>
                 @endif
-                <li class="dropdown right-side-link">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-haspopup="true" aria-expanded="false">ENG<span class="ion-chevron-down"></span></a>
-                    <ul class="dropdown-menu with-language">
-                        <li><a href="#">Fr</a></li>
-                        <li><a href="#">De</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown right-side-link last">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-haspopup="true" aria-expanded="false">USD<span class="ion-chevron-down"></span></a>
-                    <ul class="dropdown-menu with-language">
-                        <li><a href="#">USD</a></li>
-                        <li><a href="#">Eur</a></li>
-                    </ul>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">{{ app()->getLocale() }}<span class="ion-chevron-down"></span></a>
+                    @if(app()->getLocale() == 'en')
+                        <ul class="dropdown-menu with-language">
+                            <li><a rel="alternate" hreflang="tr" href="{{ route(request()->getUri(),['lang'  => 'tr']) }}">TR</a></li>
+                        </ul>
+                    @elseif(app()->getLocale() == 'tr')
+                        <ul class="dropdown-menu with-language">
+                            <li><a rel="alternate" hreflang="tr" href="{{ route(request()->getRequestUri(),['lang'  => 'en']) }}">EN</a></li>
+                        </ul>
+                    @endif
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->

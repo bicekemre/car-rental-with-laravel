@@ -23,13 +23,15 @@ Route::permanentRedirect('/', '/home');
 Route::middleware('language')->group(function (){
 
     Route::prefix('{lang?}')->group(function (){
-        Route::get('/home', [HomeController::class, 'home'])->name('home');
+        Route::get('/home', [HomeController::class, 'home'])
+            ->name('home');
 
-    });
+        Route::get('/registration', [AuthController::class, 'registration'])
+            ->name('registration');
+
 
     Route::controller(AuthController::class)->group(function () {
-        Route::get('/registration' , 'registration')
-            ->name('registration');
+
 
         Route::post('/login', 'login')
             ->name('login');
@@ -49,7 +51,7 @@ Route::middleware('language')->group(function (){
         Route::get('/cars', 'index')
             ->name('cars');
 
-        Route::get('/list-cars', 'list')
+        Route::get('list-cars', 'list')
             ->name('list.cars');
 
         Route::get('/car-detail/{id}', 'detail')
@@ -65,6 +67,7 @@ Route::middleware('language')->group(function (){
     });
 
     Route::get('/reserve', [CarController::class, 'reserve'])->name('reserve');
+    });
 
 });
 
