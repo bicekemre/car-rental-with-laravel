@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/home', [HomeController::class, 'home'])->name('home');
 Route::permanentRedirect('/', '/home');
 
+
 Route::middleware('language')->group(function (){
 
     Route::prefix('{lang?}')->group(function (){

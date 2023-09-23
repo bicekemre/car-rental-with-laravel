@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Symfony\Component\HttpFoundation\Response;
 
 class Lang
@@ -25,6 +24,7 @@ class Lang
         $lang = explode('/', $request->getRequestUri());
 
         app()->setLocale($lang[1] ?? 'en');
+
         return $next($request);
     }
 

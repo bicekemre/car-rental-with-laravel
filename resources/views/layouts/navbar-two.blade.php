@@ -9,17 +9,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ route('home', app()->getLocale()) }}"><img src="{{ asset('./img/company-logo.png') }}" alt=""/></a>
+            <a class="navbar-brand" href="{{ \App\Helpers\View::route('home') }}"><img src="{{ asset('./img/company-logo.png') }}" alt=""/></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li class="active">
-                    <a href="{{ route('home', app()->getLocale()) }}">{{ __('navbar.home') }}</a>
+                    <a href="{{ route('home') }}">{{ __('navbar.home') }}</a>
                 </li>
                 <li class="">
-                    <a href="{{ route('cars', app()->getLocale()) }}">{{ __('navbar.cars') }}</a>
+                    <a href="{{ route('cars') }}">{{ __('navbar.cars') }}</a>
                 </li>
                 <li class="">
                     <a href="/blog">{{ __('navbar.blog') }}</a>
