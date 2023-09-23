@@ -47,11 +47,11 @@
                        aria-haspopup="true" aria-expanded="false">{{ app()->getLocale() }}<span class="ion-chevron-down"></span></a>
                     @if(app()->getLocale() == 'en')
                         <ul class="dropdown-menu with-language">
-                            <li><a rel="alternate" hreflang="tr" href="{{ route(request()->getUri(),['lang'  => 'tr']) }}">TR</a></li>
+                            <li><a rel="alternate" hreflang="tr" href="{{ route(request()->route()->getName(), ['lang' => 'tr', 'id' => request()->route()->parameters()['id'] ?? null]) }}">TR</a></li>
                         </ul>
                     @elseif(app()->getLocale() == 'tr')
                         <ul class="dropdown-menu with-language">
-                            <li><a rel="alternate" hreflang="tr" href="{{ route(request()->getRequestUri(),['lang'  => 'en']) }}">EN</a></li>
+                            <li><a rel="alternate" hreflang="tr" href="{{ route(request()->route()->getName(), ['lang' => 'en', 'id' => request()->route()->parameters()['id'] ?? null]) }}">EN</a></li>
                         </ul>
                     @endif
                 </li>

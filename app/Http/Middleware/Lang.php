@@ -25,7 +25,6 @@ class Lang
         $lang = explode('/', $request->getRequestUri());
 
         app()->setLocale($lang[1] ?? 'en');
-
         return $next($request);
     }
 

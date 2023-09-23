@@ -46,16 +46,17 @@ Route::middleware('language')->group(function (){
 
     });
 
+    Route::get('/car-detail/{id}', [CarController::class, 'detail'])->name('detail');
 
     Route::controller(CarController::class)->group(function () {
         Route::get('/cars', 'index')
             ->name('cars');
 
-        Route::get('list-cars', 'list')
+        Route::get('/list-cars', 'list')
             ->name('list.cars');
 
-        Route::get('/car-detail/{id}', 'detail')
-            ->name('detail');
+       /* Route::get('/car-detail/{id}', 'detail')
+            ->name('detail');*/
 
         Route::get('/book', 'book')
             ->name('book');

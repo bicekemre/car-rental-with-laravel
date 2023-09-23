@@ -47,7 +47,7 @@ class CarController extends Controller
         return view('cars.index', compact('cars', 'hasQuery', 'locations'));
     }
 
-    public function detail($id)
+    public function detail($lang, $id)
     {
         $car = Car::find($id);
         $extras = Extra::all();
