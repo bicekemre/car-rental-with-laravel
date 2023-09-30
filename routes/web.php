@@ -17,11 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', [HomeController::class, 'home'])->name('home');
-Route::permanentRedirect('/', '/home');
 
 
 Route::middleware('language')->group(function (){
+    Route::post('login', [AuthController::class, 'login'])->name('login');
+
+    Route::post('/register', [AuthController::class, 'register'])
+        ->name('register');
+
+    Route::get('/logout', [AuthController::class, 'logout'])
+        ->name('logout');
+
+    Route::permanentRedirect('/home', '/' .  app()->getLocale(). '/home');
+
 
     Route::prefix('{lang?}')->group(function (){
         Route::get('/home', [HomeController::class, 'home'])
@@ -30,22 +38,9 @@ Route::middleware('language')->group(function (){
         Route::get('/registration', [AuthController::class, 'registration'])
             ->name('registration');
 
+        Route::get('/profile', [AuthController::class, 'profile'])
+            ->name('profile');
 
-    Route::controller(AuthController::class)->group(function () {
-
-
-        Route::post('/login', 'login')
-            ->name('login');
-
-        Route::post('/register', 'register')
-            ->name('register');
-
-        Route::get('/logout', 'logout')
-            ->name('logout');
-
-        Route::get('/profile', 'profile')->name('profile');
-
-    });
 
     Route::get('/car-detail/{id}', [CarController::class, 'detail'])->name('detail');
 

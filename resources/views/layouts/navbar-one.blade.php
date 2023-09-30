@@ -16,10 +16,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="{{ route('home',  app()->getLocale()) }}">{{ __('navbar.home') }}</a>
+                    <a href="{{ route('home', app()->getLocale()) }}">{{ __('navbar.home') }}</a>
                 </li>
                 <li class="">
-                    <a href="{{ route('cars') }}">{{ __('navbar.cars') }}</a>
+                    <a href="{{ route('cars', app()->getLocale()) }}">{{ __('navbar.cars') }}</a>
                 </li>
                 <li class="">
                     <a href="">{{ __('navbar.blog') }}</a>
@@ -34,7 +34,7 @@
                     <a href="/contact">{{ __('navbar.contact') }}</a>
                 </li>
                 @if(auth()->user())
-                    <li class=""><a href="{{ route('profile') }}">
+                    <li class=""><a href="{{ route('profile', app()->getLocale()) }}">
                             {{ __('profile') }}</a>
                     </li>
                     <li class=""><a href="{{ route('logout') }}">
@@ -50,11 +50,11 @@
                        aria-haspopup="true" aria-expanded="false">{{ app()->getLocale() }}<span class="ion-chevron-down"></span></a>
                     @if(app()->getLocale() == 'en')
                         <ul class="dropdown-menu with-language">
-                            <li><a rel="alternate" hreflang="tr" href="{{ route(request()->route()->getName(),['lang'  => 'tr']) }}">TR</a></li>
+                            <li><a rel="alternate" hreflang="tr" href="{{ route(request()->route()->getName(), ['lang' => 'tr', 'id' => request()->route()->parameters()['id'] ?? null]) }}">TR</a></li>
                         </ul>
                     @elseif(app()->getLocale() == 'tr')
                         <ul class="dropdown-menu with-language">
-                            <li><a rel="alternate" hreflang="tr" href="{{ route(request()->route()->getName(),['lang'  => 'en']) }}">EN</a></li>
+                            <li><a rel="alternate" hreflang="tr" href="{{ route(request()->route()->getName(), ['lang' => 'en', 'id' => request()->route()->parameters()['id'] ?? null]) }}">EN</a></li>
                         </ul>
                     @endif
                 </li>

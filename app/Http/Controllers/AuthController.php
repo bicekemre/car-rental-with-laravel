@@ -12,7 +12,7 @@ class AuthController extends Controller
     public function registration()
     {
         if (auth()->check() == 1) {
-            return redirect()->route('profile');
+            return redirect()->route('profile', app()->getLocale());
         }
         return view('auth.login');
     }
@@ -46,7 +46,7 @@ class AuthController extends Controller
         auth()->login($user);
 
         if (isset($_COOKIE['request_data'])) {
-            return redirect()->route('book');
+            return redirect()->route('book', app()->getLocale());
         }else{
             return redirect()->route('home');
         }
