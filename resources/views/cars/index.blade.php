@@ -22,7 +22,7 @@
             <div class="container">
                 <div class="listing-search-container">
                     <h2>Search For<span class="dot">.</span></h2>
-                    <form action="{{ route('list.cars') }}" method="GET" >
+                    <form action="{{ route('list.cars', app()->getLocale()) }}" method="GET" >
                         <input type="hidden" name="q" value="true">
                         <div class="">
                             <div class="rq-search-container">
@@ -74,121 +74,6 @@
 
                 </div> <!-- /.search-container -->
                 <div class="rq-listing-top-bar-filter-option">
-                    <div class="filter-list">
-                        <h5>Filter by</h5>
-                        <div class="filter-single">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Brand <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                        <span class="rq-checkbox">
-                          <input type="checkbox" id="brand-one">
-                          <label for="brand-one">Ford Shelby</label>
-                        </span>
-                                    </li>
-                                    <li>
-                        <span class="rq-checkbox">
-                          <input type="checkbox" id="brand-two">
-                          <label for="brand-two">BMW M6 Gran</label>
-                        </span>
-                                    </li>
-                                    <li>
-                        <span class="rq-checkbox">
-                          <input type="checkbox" id="brand-three">
-                          <label for="brand-three">AUDI R8 2011</label>
-                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="filter-single">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Class <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-
-                                    <li>
-                        <span class="rq-checkbox">
-                          <input type="checkbox" id="class-a">
-                          <label for="class-a">A class</label>
-                        </span>
-                                    </li>
-                                    <li>
-                        <span class="rq-checkbox">
-                          <input type="checkbox" id="class-b">
-                          <label for="class-b">B class</label>
-                        </span>
-                                    </li>
-                                    <li>
-                        <span class="rq-checkbox">
-                          <input type="checkbox" id="class-c">
-                          <label for="class-c">C class</label>
-                        </span>
-                                    </li>
-                                    <li>
-                        <span class="rq-checkbox">
-                          <input type="checkbox" id="class-d">
-                          <label for="class-d">D class</label>
-                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="filter-single">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Fuel <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                        <span class="rq-checkbox">
-                          <input type="checkbox" id="fule-one">
-                          <label for="fule-one">50 liter</label>
-                        </span>
-                                    </li>
-                                    <li>
-                        <span class="rq-checkbox">
-                          <input type="checkbox" id="fuel-two">
-                          <label for="fuel-two">100 liter</label>
-                        </span>
-                                    </li>
-                                    <li>
-                        <span class="rq-checkbox">
-                          <input type="checkbox" id="fuel-three">
-                          <label for="fuel-three">120 liter</label>
-                        </span>
-                                    </li>
-                                    <li>
-                        <span class="rq-checkbox">
-                          <input type="checkbox" id="fuel-four">
-                          <label for="fuel-four">130 liter</label>
-                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="filter-single">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Price <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <div class="rq-pricing-slider">
-                                            <div id="slider-range"></div>
-                                            <p>
-                                                <label for="amount">range:</label>
-                                                <input type="text" id="amount">
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                     <div class="rq-grid-list-view-option">
                         <a class="active" href="#" data-class="rq-listing-grid"><i class="ion-grid"></i></a>
                         <a href="#" data-class="rq-listing-list"><i class="ion-navicon"></i></a>
@@ -237,18 +122,18 @@
                     <div class="rq-pagination">
                         <nav>
                             <ul class="rq-pagination-list">
-                                <li class="pagin-text">
-                                    <a href="#" aria-label="Previous">
+                                <li class="pagin-text {{ $cars->currentPage() == 1 ? 'disabled' : '' }}">
+                                    <a href="{{ $cars->previousPageUrl() }}" aria-label="Previous">
                                         <span aria-hidden="true"><i class="arrow_left"></i> Prev</span>
                                     </a>
                                 </li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a class="center-dot" href="#">...</a></li>
-                                <li><a href="#">12</a></li>
-                                <li class="pagin-text">
-                                    <a href="#" aria-label="Next">
+                                @foreach ($cars->getUrlRange(1, $cars->lastPage()) as $page => $url)
+                                <li class=" {{ $cars->currentPage() == $page ? 'active' : '' }}">
+                                    <a href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                                @endforeach
+                                <li class="pagin-text {{ $cars->currentPage() == $cars->lastPage() ? 'disabled' : '' }}">
+                                    <a href="{{ $cars->nextPageUrl() }}" aria-label="Next">
                                         <span aria-hidden="true">next <i class="arrow_right"></i></span>
                                     </a>
                                 </li>

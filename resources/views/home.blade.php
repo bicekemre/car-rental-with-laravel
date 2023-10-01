@@ -7,11 +7,11 @@
             <div class="rq-counting-list home-two-version">
                 <ul class="list-unstyled">
                     <li>
-                        <span class="count-result"  data-from="25" data-to="12460" data-speed="5000" data-refresh-interval="50"></span>
+                        <span class="count-result"  data-from="25" data-to="{{ $usersCount }}" data-speed="5000" data-refresh-interval="50"></span>
                         <span class="count-category">{{ __('home.User access') }}</span>
                     </li>
                     <li>
-                        <span class="count-result"  data-from="25" data-to="12460" data-speed="5000" data-refresh-interval="50"></span>
+                        <span class="count-result"  data-from="25" data-to="{{ $carsCount }}" data-speed="5000" data-refresh-interval="50"></span>
                         <span class="count-category">{{ __('home.Cars') }}</span>
                     </li>
                     <li>

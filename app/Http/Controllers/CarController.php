@@ -16,7 +16,7 @@ class CarController extends Controller
 {
     public function index()
     {
-        $cars = Car::all();
+        $cars = Car::query()->paginate(6);
         $locations  = Location::all();
 
         return view('cars.index', compact('cars','locations'));
@@ -37,10 +37,10 @@ class CarController extends Controller
 
         $carIdsToExclude = $reservations->pluck('car_id')->toArray();
 
-        $cars = Car::where([
+        $cars = Car::query()->where([
             'location_id' => $request->location_id,
             'class' => $request->car_type,
-        ])->whereNotIn('id', $carIdsToExclude)->get();
+        ])->whereNotIn('id', $carIdsToExclude)->paginate(6);
 
         $hasQuery = $request->q;
 
