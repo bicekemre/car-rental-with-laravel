@@ -22,18 +22,18 @@
             <div class="container">
                 <div class="listing-search-container">
                     <h2>Search For<span class="dot">.</span></h2>
-                    <form action="{{ route('list.cars', app()->getLocale()) }}" method="GET" >
+                    <form action="{{ route('list.cars') }}" method="GET" >
                         <input type="hidden" name="q" value="true">
                         <div class="">
                             <div class="rq-search-container">
                                 <div class="rq-search-single">
                                     <div class="rq-search-content">
-                                        <span class="rq-search-heading">Location</span>
+                                        <span class="rq-search-heading">{{ __('home.Location') }}</span>
                                         <select name="location_id" class="category-option">
-                                            <option value="0">Pick a location</option>
+                                            <option value="0">{{ __('home.Pick a location') }}</option>
                                             @isset($locations)
                                                 @foreach($locations as $location)
-                                                    <option {{ request()->get('location_id') == $location->id ? 'selected' : ''  }} value="{{ $location->id }}">{{ $location->name }}</option>
+                                                    <option value="{{ $location->id }}">{{ $location->name }}</option>
                                                 @endforeach
                                             @endisset
                                         </select>
@@ -41,31 +41,32 @@
                                 </div>
                                 <div class="rq-search-single">
                                     <div class="rq-search-content">
-                                        <span class="rq-search-heading">Pick up</span>
-                                        <input type="text" name="pickup_date" value="{{ request()->get('pickup_date') }}" class="rq-form-element datepicker" id="startdate" placeholder="Pick up date"/>
+                                        <span class="rq-search-heading">{{ __('home.Pick up') }}</span>
+                                        <input type="text" name="pickup_date" class="rq-form-element datepicker" id="startdate" placeholder="{{ __('home.Pick up date') }}"/>
                                         <i class="ion-chevron-down datepicker-arrow"></i>
                                     </div>
                                 </div>
                                 <div class="rq-search-single">
                                     <div class="rq-search-content">
                                         <span class="rq-search-heading">Return</span>
-                                        <input type="text" name="return_date" class="rq-form-element" value="{{ request()->get('return_date') }}" id="enddate" placeholder="Return date"/>
+                                        <input type="text" name="return_date" class="rq-form-element" id="enddate" placeholder="{{ __('home.Return date') }}"/>
                                         <i class="ion-chevron-down datepicker-arrow"></i>
                                     </div>
                                 </div>
                                 <div class="rq-search-single">
                                     <div class="rq-search-content last-child">
-                                        <span class="rq-search-heading">Car Type</span>
+                                        <span class="rq-search-heading">{{ __('home.Car Type') }}</span>
                                         <select name="car_type" class="category-option">
-                                            <option {{ request()->get('car_type') == 'SUV' ? 'selected' : ''  }} value="SUV">SUV</option>
-                                            <option {{ request()->get('car_type') == 'Electric' ? 'selected' : ''  }} value="Electric">Electric</option>
-                                            <option {{ request()->get('car_type') == 'Sedan' ? 'selected' : ''  }} value="Sedan">Sedan</option>
+                                            <option value="SUV">{{ __('home.SUV') }}</option>
+                                            <option value="Sedan">{{ __('home.Sedan') }}</option>
+                                            <option value="van">{{ __('home.Van') }}</option>
+                                            <option value="Station Wagon">{{ __('home.Station Wagon') }}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="rq-search-single search-btn">
                                     <div class="rq-search-content">
-                                        <button type="submit" class="rq-btn rq-btn-primary fluid-btn">Search <i class="arrow_right"></i></button>
+                                        <button type="submit" class="rq-btn rq-btn-primary fluid-btn">{{ __('home.Search') }} <i class="arrow_right"></i></button>
                                     </div>
                                 </div>
                             </div> <!-- / .search-container -->
