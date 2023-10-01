@@ -1,23 +1,22 @@
 @extends('layouts.master')
 @section('header')
     <div class="header-body" style="background: url({{ asset('./img/turbo-banner-two.jpg') }}) top center no-repeat; background-size: 100% 65%;">
-        <div class="container">
-            <h1>Welcome <strong>Turbo</strong></h1>
-            <p>Looking to rent a car for an upcoming vacation or business trip? In TURBO, we make renting
-                a car seamless so you can get right on your way. </p>
+        <div class="container ">
+            <h1>{{ __('home.welcome') }} <strong>Turbo</strong></h1>
+            <p>{{ __('home.title') }} </p>
             <div class="rq-counting-list home-two-version">
                 <ul class="list-unstyled">
                     <li>
                         <span class="count-result"  data-from="25" data-to="12460" data-speed="5000" data-refresh-interval="50"></span>
-                        <span class="count-category">User access</span>
+                        <span class="count-category">{{ __('home.User access') }}</span>
                     </li>
                     <li>
                         <span class="count-result"  data-from="25" data-to="12460" data-speed="5000" data-refresh-interval="50"></span>
-                        <span class="count-category">Cars</span>
+                        <span class="count-category">{{ __('home.Cars') }}</span>
                     </li>
                     <li>
                         <span class="count-result" data-from="25" data-to="12460" data-speed="5000" data-refresh-interval="50"></span>
-                        <span class="count-category">Reviews</span>
+                        <span class="count-category">{{ __('home.Reviews') }}</span>
                     </li>
                 </ul>
             </div>
@@ -30,9 +29,9 @@
                     <div class="rq-search-container">
                             <div class="rq-search-single">
                                 <div class="rq-search-content">
-                                    <span class="rq-search-heading">Location</span>
+                                    <span class="rq-search-heading">{{ __('home.Location') }}</span>
                                     <select name="location_id" class="category-option">
-                                        <option value="0">Pick a location</option>
+                                        <option value="0">{{ __('home.Pick a location') }}</option>
                                         @isset($locations)
                                             @foreach($locations as $location)
                                                 <option value="{{ $location->id }}">{{ $location->name }}</option>
@@ -43,31 +42,32 @@
                             </div>
                             <div class="rq-search-single">
                                 <div class="rq-search-content">
-                                    <span class="rq-search-heading">Pick up</span>
-                                    <input type="text" name="pickup_date" class="rq-form-element datepicker" id="startdate" placeholder="Pick up date"/>
+                                    <span class="rq-search-heading">{{ __('home.Pick up') }}</span>
+                                    <input type="text" name="pickup_date" class="rq-form-element datepicker" id="startdate" placeholder="{{ __('home.Pick up date') }}"/>
                                     <i class="ion-chevron-down datepicker-arrow"></i>
                                 </div>
                             </div>
                             <div class="rq-search-single">
                                 <div class="rq-search-content">
                                     <span class="rq-search-heading">Return</span>
-                                    <input type="text" name="return_date" class="rq-form-element" id="enddate" placeholder="Return date"/>
+                                    <input type="text" name="return_date" class="rq-form-element" id="enddate" placeholder="{{ __('home.Return date') }}"/>
                                     <i class="ion-chevron-down datepicker-arrow"></i>
                                 </div>
                             </div>
                             <div class="rq-search-single">
                                 <div class="rq-search-content last-child">
-                                    <span class="rq-search-heading">Car Type</span>
+                                    <span class="rq-search-heading">{{ __('home.Car Type') }}</span>
                                     <select name="car_type" class="category-option">
-                                        <option value="SUV">SUV</option>
-                                        <option value="Electric">Electric</option>
-                                        <option value="Sedan">Sedan</option>
+                                        <option value="SUV">{{ __('home.SUV') }}</option>
+                                        <option value="Sedan">{{ __('home.Sedan') }}</option>
+                                        <option value="van">{{ __('home.Van') }}</option>
+                                        <option value="Station Wagon">{{ __('home.Station Wagon') }}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="rq-search-single search-btn">
                                 <div class="rq-search-content">
-                                    <button type="submit" class="rq-btn rq-btn-primary fluid-btn">Search <i class="arrow_right"></i></button>
+                                    <button type="submit" class="rq-btn rq-btn-primary fluid-btn">{{ __('home.Search') }} <i class="arrow_right"></i></button>
                                 </div>
                             </div>
                     </div> <!-- / .search-container -->
@@ -84,7 +84,7 @@
     <div class="rq-page-content">
         <div class="rq-content-block" id="cars">
             <div class="rq-title-container text-center">
-                <h2 class="rq-title no-padding">Most Popular <strong>Cars.</strong></h2>
+                <h2 class="rq-title no-padding">{{ __('home.Most Popular') }} <strong>{{ __('home.Cars') }}.</strong></h2>
             </div>
             <div class="rq-secondary-slider">
                 <div class="owl-loop owl-carousel">
@@ -92,26 +92,18 @@
                         @foreach($cars as $car)
                             <div class="item">
                                 <div class="car-details-bg">
-                                    <span>$39/Days</span>
+                                    <span>{{ $car->price_perday }}/{{ __('home.Days') }}</span>
                                     <div class="owl-title-area">
-                                        <h4><a href="#">2016 BMW 2 Series 228i</a></h4>
-                                        <span class="rating">
-                              <i class="ion-android-star"></i>
-                              <i class="ion-android-star"></i>
-                              <i class="ion-android-star"></i>
-                              <i class="ion-android-star"></i>
-                              <i class="ion-android-star"></i>
-                            </span>
+                                        <h4><a href="#">{{ $car->brand . ' ' .$car->model }}</a></h4>
                                     </div>
                                 </div>
                                 <img src="{{ asset('img/tab-image/full-img1.png') }}" data-img-src="" alt="">
-                                <h5><a href="#">2016 BMW 2 Series 228i</a></h5>
                             </div>
                         @endforeach
                     @endisset
                 </div>
                 <div class="browse-cars">
-                    <a href="{{ route('cars') }}">Browse all cars</a>
+                    <a href="{{ route('cars') }}">{{ __('home.Browse all cars') }}</a>
                 </div>
 
             </div>

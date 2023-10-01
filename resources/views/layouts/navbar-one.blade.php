@@ -35,7 +35,7 @@
                 </li>
                 @if(auth()->user())
                     <li class=""><a href="{{ route('profile', app()->getLocale()) }}">
-                            {{ __('profile') }}</a>
+                            {{ __('navbar.profile') }}</a>
                     </li>
                     <li class=""><a href="{{ route('logout') }}">
                             {{ __('navbar.logout') }}</a>
