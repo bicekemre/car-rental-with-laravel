@@ -8,10 +8,10 @@
             <div class="rq-overlay"></div>
             <div class="container">
                 <div class="rq-title-container bredcrumb-title text-center">
-                    <h2 class="rq-title">Car Listing</h2>
+                    <h2 class="rq-title">{{ __('cars.Car Listing') }}</h2>
                     <ol class="breadcrumb rq-subtitle secondary">
-                        <li><a href="#">Home</a></li>
-                        <li class="active">Car Listing</li>
+                        <li><a href="{{ route('home') }}">{{ __('navbar.home') }}</a></li>
+                        <li class="active">{{ __('cars.Car Listing') }}</li>
                     </ol>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                                     <div class="col-md-4 col-sm-6">
                                         <div class="listing-single">
                                             <div class="listing-img">
-                                                <img src="{{ $car->imageable->first()->url ?? '' }}" alt="">
+                                                <img src="{{ asset($car->imageable->first()->url ?? '')  }}" alt="">
                                             </div>
                                             <div class="listing-details">
                                                 <h5 class="car-brand">{{ $car->brand }}</h5>
@@ -102,14 +102,14 @@
                                                     <li><i class="ion-star"></i></li>
                                                 </ul>
                                                 <ul>
-                                                    <li>Class: <span>{{ $car->class }}</span></li>
-                                                    <li>Body Style: <span>{{ $car->type }}</span></li>
-                                                    <li>Transmission: <span>{{ $car->transmission }}</span></li>
+                                                    <li>{{ __('cars.Class') }}: <span>{{ $car->class }}</span></li>
+                                                    <li>{{ __('cars.Body Style') }}: <span>{{ $car->type }}</span></li>
+                                                    <li>{{ __('cars.Transmission') }}: <span>{{ $car->transmission }}</span></li>
                                                 </ul>
                                                 <div class="listing-footer">
-                                                    <span><a href="{{ route('detail',['id' => $car->id, 'lang' => app()->getLocale()])  }}">Details</a></span>
+                                                    <span><a href="{{ route('detail',['id' => $car->id, 'lang' => app()->getLocale()])  }}">{{ __('cars.Details') }}</a></span>
                                                     <span>
-                                                        Starting at <span class="price">${{ $car->price_perday }}</span> / day
+                                                        {{ __('cars.Starting at') }} <span class="price">${{ $car->price_perday }}</span> / {{ __('cars.day') }}
                                                     </span>
                                                 </div>
 
@@ -125,7 +125,7 @@
                             <ul class="rq-pagination-list">
                                 <li class="pagin-text {{ $cars->currentPage() == 1 ? 'disabled' : '' }}">
                                     <a href="{{ $cars->previousPageUrl() }}" aria-label="Previous">
-                                        <span aria-hidden="true"><i class="arrow_left"></i> Prev</span>
+                                        <span aria-hidden="true"><i class="arrow_left"></i> {{ __('cars.Prev') }}</span>
                                     </a>
                                 </li>
                                 @foreach ($cars->getUrlRange(1, $cars->lastPage()) as $page => $url)
@@ -135,7 +135,7 @@
                                 @endforeach
                                 <li class="pagin-text {{ $cars->currentPage() == $cars->lastPage() ? 'disabled' : '' }}">
                                     <a href="{{ $cars->nextPageUrl() }}" aria-label="Next">
-                                        <span aria-hidden="true">next <i class="arrow_right"></i></span>
+                                        <span aria-hidden="true">{{ __('cars.Next') }} <i class="arrow_right"></i></span>
                                     </a>
                                 </li>
                             </ul>
