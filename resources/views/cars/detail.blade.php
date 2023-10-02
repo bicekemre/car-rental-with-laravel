@@ -23,11 +23,11 @@
             <div class="rq-content-block">
                 <div class="container">
                     <div class="rq-title-container bredcrumb-title text-center"> <!-- start of breadcrumb -->
-                        <h1 class="rq-title light">Car listing detail</h1>
+                        <h1 class="rq-title light">{{ __('detail.Car listing detail') }}</h1>
                         <ol class="breadcrumb secondary rq-subtitle">
-                            <li><a href="{{ route('home') }}">Home</a></li>
-                            <li><a href="{{ route('cars') }}">Car listing</a></li>
-                            <li class="active">Car Listing Details</li>
+                            <li><a href="{{ route('home') }}">{{ __('navbar.home') }}</a></li>
+                            <li><a href="{{ route('cars') }}">{{ __('detail.Car listing') }}</a></li>
+                            <li class="active">{{ __('detail.Car Listing Details') }}</li>
                         </ol>
                     </div> <!-- end of breadcrumb -->
                     <div class="rq-listing-promo-wrapper">
@@ -36,27 +36,27 @@
                                 <div class="rq-listing-promo-content">
                                     <div class="rq-listing-item">
                                         <img src="{{ asset('img/listing-icon1.png') }}" alt="">
-                                        <h6 class="rq-listing-item-title">Mileage</h6>
+                                        <h6 class="rq-listing-item-title">{{ __('detail.Mileage') }}</h6>
                                         <h4 class="rq-listing-item-number">{{ $car->mil }}</h4>
                                     </div>
                                     <div class="rq-listing-item">
                                         <img src="{{ asset('img/listing-icon2.png') }}" alt="">
-                                        <h6 class="rq-listing-item-title">Transmission</h6>
-                                        <h4 class="rq-listing-item-number">{{ $car->transmission }}</h4>
+                                        <h6 class="rq-listing-item-title">{{ __('detail.Transmission') }}</h6>
+                                        <h4 class="rq-listing-item-number">{{ $desc->transmission ?? ''}}</h4>
                                     </div>
                                     <div class="rq-listing-item">
                                         <img src="{{ asset('img/listing-icon3.png') }}" alt="">
-                                        <h6 class="rq-listing-item-title">Seats</h6>
-                                        <h4 class="rq-listing-item-number">{{ $car->seats }} Adults</h4>
+                                        <h6 class="rq-listing-item-title">{{ __('detail.Seats') }}</h6>
+                                        <h4 class="rq-listing-item-number">{{ $car->seats }} {{ __('detail.Adults') }}</h4>
                                     </div>
                                     <div class="rq-listing-item">
                                         <img src="{{ asset('img/listing-icon4.png') }}" alt="">
-                                        <h6 class="rq-listing-item-title">Luggage</h6>
-                                        <h4 class="rq-listing-item-number">{{ $car->luggage }} Bags</h4>
+                                        <h6 class="rq-listing-item-title">{{ __('detail.Luggage') }}</h6>
+                                        <h4 class="rq-listing-item-number">{{ $desc->luggage ?? ''}} </h4>
                                     </div>
                                     <div class="rq-listing-item">
                                         <img src="{{ asset('img/listing-icon5.png') }}" alt="">
-                                        <h6 class="rq-listing-item-title">Fuel</h6>
+                                        <h6 class="rq-listing-item-title">{{ __('detail.Fuel') }}</h6>
                                         <h4 class="rq-listing-item-number">{{ $car->fuel_type }}</h4>
                                     </div>
                                 </div>
@@ -67,9 +67,9 @@
                         <div class="rq-blog-listing">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#listing_tab_hor_1" aria-controls="listing_tab_hor_1" role="tab" data-toggle="tab">Features</a></li>
-                                <li role="presentation" ><a href="#listing_tab_hor_2" aria-controls="listing_tab_hor_2" role="tab" data-toggle="tab">Descriptions</a></li>
-                                <li role="presentation"><a href="#listing_tab_hor_3" aria-controls="listing_tab_hor_3" role="tab" data-toggle="tab">Reviews(1)</a></li>
+                                <li role="presentation" class="active"><a href="#listing_tab_hor_1" aria-controls="listing_tab_hor_1" role="tab" data-toggle="tab">{{ __('detail.Features') }}</a></li>
+                                <li role="presentation" ><a href="#listing_tab_hor_2" aria-controls="listing_tab_hor_2" role="tab" data-toggle="tab">{{ __('detail.Descriptions') }}</a></li>
+                                <li role="presentation"><a href="#listing_tab_hor_3" aria-controls="listing_tab_hor_3" role="tab" data-toggle="tab">{{ __('detail.Reviews') }}(1)</a></li>
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content">
@@ -83,7 +83,7 @@
                                     </ul>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="listing_tab_hor_2">
-                                   {!! $car->desc !!}
+                                   {!! $desc->desc ?? '' !!}
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="listing_tab_hor_3">
                                     <div class="rq-single-post-header">
@@ -120,7 +120,7 @@
                     </div>  <!-- ./edn feature tab -->
                     <div class="location-map">
                         <div class="listing-page-title">
-                            <h3>Location</h3>
+                            <h3>{{ __('detail.Location') }}</h3>
                         </div>
                         <div class="rq-contact-us-map"> <!-- start map portion -->
                             <div id="listing-map"></div>
@@ -134,13 +134,13 @@
                     <input type="hidden" name="car_id" value="{{ $car->id }}">
                     <div class="container">
                         <div class="listing-page-title">
-                            <h3>Book Car Now</h3>
+                            <h3>{{ __('detail.Book Car Now') }}</h3>
                             <div class="car-search">
                                 <div class="car-search">
                                     <div class="rq-search-container">
                                         <div class="rq-search-single">
                                             <div class="rq-search-content">
-                                                <span class="rq-search-heading">Pick Up Location</span>
+                                                <span class="rq-search-heading">{{ __('detail.Pick Up Location') }}</span>
                                                 <select name="pickup_location" class="category-option">
                                                     <option selected value="{{ $car->location->id ?? ''}}" >{{ $car->location->name ?? ''}}</option>
                                                 </select>
@@ -148,9 +148,9 @@
                                         </div>
                                         <div class="rq-search-single">
                                             <div class="rq-search-content">
-                                                <span class="rq-search-heading">Return Location</span>
+                                                <span class="rq-search-heading">{{ __('detail.Return Location') }}</span>
                                                 <select name="return_location" class="category-option">
-                                                    <option value="0">Pick a location</option>
+                                                    <option value="0">{{ __('detail.Pick a location') }}</option>
                                                     @isset($locations)
                                                         @foreach($locations as $location)
                                                             <option value="{{ $location->id }}">{{ $location->name }}</option>
@@ -161,21 +161,21 @@
                                         </div>
                                         <div class="rq-search-single">
                                             <div class="rq-search-content">
-                                                <span class="rq-search-heading">Pick up</span>
+                                                <span class="rq-search-heading">{{ __('detail.Pick up') }}</span>
                                                 <input type="text" name="pickup_date" class="rq-form-element datepicker" id="startdate" placeholder="Pick up date"/>
                                                 <i class="ion-chevron-down datepicker-arrow"></i>
                                             </div>
                                         </div>
                                         <div class="rq-search-single">
                                             <div class="rq-search-content">
-                                                <span class="rq-search-heading">Return</span>
+                                                <span class="rq-search-heading">{{ __('detail.Return') }}</span>
                                                 <input type="text" name="return_date" class="rq-form-element" id="enddate" placeholder="Return date"/>
                                                 <i class="ion-chevron-down datepicker-arrow"></i>
                                             </div>
                                         </div>
                                         <div class="rq-search-single search-btn">
                                             <div class="rq-search-content">
-                                                <button type="submit" class="rq-btn rq-btn-primary fluid-btn">Book Now <i class="arrow_right"></i></button>
+                                                <button type="submit" class="rq-btn rq-btn-primary fluid-btn">{{ __('detail.Book Now') }} <i class="arrow_right"></i></button>
                                             </div>
                                         </div>
                                     </div>

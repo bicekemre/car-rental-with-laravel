@@ -1,0 +1,23 @@
+<?php
+return [
+    'Car listing detail' => 'Car listing detail',
+    'Car listing' => 'Car listing',
+    'Car Listing Details' => 'Car Listing Details',
+    'Mileage' => 'Mileage',
+    'Transmission' => 'Transmission',
+    'Seats' => 'Seats',
+    'Adults' => 'Adults',
+    'Luggage' => 'Luggage',
+    'Fuel' => 'Fuel',
+    'Features' => 'Features',
+    'Descriptions' => 'Descriptions',
+    'Reviews' => 'Reviews',
+    'Book Car Now' => 'Book Car Now',
+    'Pick Up Location' => 'Pick Up Location',
+    'Return Location' => 'Return Location',
+    'Pick a location' => 'Pick a location',
+    'Pick up' => 'Pick up',
+    'Return' => 'Return',
+    'Book Now' => 'Book Now',
+    'Location' => 'Location',
+];

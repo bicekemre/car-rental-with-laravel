@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\Card;
+use App\Models\Desc;
 use App\Models\Extra;
 use App\Models\Invoice;
 use App\Models\Location;
@@ -50,10 +51,12 @@ class CarController extends Controller
     public function detail($lang, $id)
     {
         $car = Car::find($id);
+
+        $desc = Desc::query()->where(['lang' => $lang, 'car_id' => $id])->get()->first();
         $extras = Extra::all();
         $locations = Location::all();
 
-        return view('cars.detail', compact('car', 'extras', 'locations'));
+        return view('cars.detail', compact('car', 'extras', 'locations', 'desc'));
     }
 
     public function book(Request $request)

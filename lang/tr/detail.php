@@ -1,0 +1,22 @@
+<?php
+return [
+    'Car listing detail' => 'Araç listeleme detayı',
+    'Car listing' => 'Araba listesi',
+    'Mileage' => 'Kilometre',
+    'Transmission' => 'Şanzıman',
+    'Seats' => 'Koltuklar',
+    'Adults' => 'Yetişkinler',
+    'Luggage' => 'Bavul',
+    'Fuel' => 'Yakıt',
+    'Features' => 'Özellikler',
+    'Descriptions' => 'Açıklamalar',
+    'Reviews' => 'Yorumlar',
+    'Book Car Now' => 'Şimdi Araç Rezervasyonu Yapın',
+    'Pick Up Location' => 'Teslim Alma Yeri',
+    'Return Location' => 'Dönüş Konumu',
+    'Pick a location' => 'Bir yer seçin',
+    'Pick up' => 'Alma',
+    'Return' => 'İade',
+    'Book Now' => 'Şimdi Rezervasyon Yapın',
+    'Location' => 'Konum',
+];

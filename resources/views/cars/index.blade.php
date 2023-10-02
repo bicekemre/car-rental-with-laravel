@@ -103,8 +103,8 @@
                                                 </ul>
                                                 <ul>
                                                     <li>{{ __('cars.Class') }}: <span>{{ $car->class }}</span></li>
-                                                    <li>{{ __('cars.Body Style') }}: <span>{{ $car->type }}</span></li>
-                                                    <li>{{ __('cars.Transmission') }}: <span>{{ $car->transmission }}</span></li>
+                                                    <li>{{ __('cars.Body Style') }}: <span>{{ __('home.'. $car->type) }}</span></li>
+                                                    <li>{{ __('cars.Transmission') }}: <span>{{ $car->desc[0]->transmission ?? ''}}</span></li>
                                                 </ul>
                                                 <div class="listing-footer">
                                                     <span><a href="{{ route('detail',['id' => $car->id, 'lang' => app()->getLocale()])  }}">{{ __('cars.Details') }}</a></span>

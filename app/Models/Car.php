@@ -44,4 +44,9 @@ class Car extends Model
     {
         return $this->hasOne(Location::class, 'id', 'location_id');
     }
+
+    public function desc()
+    {
+        return $this->hasMany(Desc::class, 'car_id' ,'id')->where(['lang' => app()->getLocale()]);
+    }
 }
