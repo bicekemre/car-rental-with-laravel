@@ -34,7 +34,7 @@
                     <li class=""><a href="{{ route('profile', app()->getLocale()) }}">
                             {{ __('navbar.profile') }}</a>
                     </li>
-                    <li class=""><a href="{{ route('logout') }}">
+                    <li class=""><a href="{{ route('logout', app()->getLocale()) }}">
                             {{ __('navbar.logout') }}</a>
                     </li>
                 @else

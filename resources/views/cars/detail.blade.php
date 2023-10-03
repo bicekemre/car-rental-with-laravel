@@ -129,7 +129,7 @@
                 </div>
             </div> <!-- .end rq-content-block -->
             <div class="rq-content-block gray-bg">
-                <form action="{{ route('book') }}" method="post">
+                <form action="{{ route('book', app()->getLocale()) }}" method="post">
                     @csrf
                     <input type="hidden" name="car_id" value="{{ $car->id }}">
                     <div class="container">

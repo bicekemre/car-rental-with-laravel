@@ -67,15 +67,16 @@ class CarController extends Controller
         }
 
         if (!auth()->check()) {
-            return redirect()->route('registration');
+            return redirect()->route('registration', app()->getLocale());
         }
 
         $cookieData = json_decode($_COOKIE['request_data']);
 
         $car = Car::find($cookieData->car_id);
 
-        $pickupDate = Carbon::createFromFormat('m/d/Y', $cookieData->pickup_date);
-        $returnDate = Carbon::createFromFormat('m/d/Y', $cookieData->return_date);
+
+        $pickupDate = Carbon::createFromFormat('m/d/Y', $cookieData->pickup_date ?? '0/0/0');
+        $returnDate = Carbon::createFromFormat('m/d/Y', $cookieData->return_date ?? '0/0/0');
 
         $dayAmount = $pickupDate->diffInDays($returnDate);
 
@@ -134,7 +135,7 @@ class CarController extends Controller
         $card->save();
 
 
-        return redirect()->route('profile');
+        return redirect()->route('profile', app()->getLocale());
     }
 
 

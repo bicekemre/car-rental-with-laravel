@@ -15,7 +15,7 @@
                     </ol>
                 </div> <!-- end .rq-title-container -->
                 <div class="rq-checkout-wrapper">
-                    <form action="{{ route('reserve') }}" method="post">
+                    <form action="{{ route('reserve', app()->getLocale()) }}" method="post">
                         @csrf
                         <input type="hidden" name="car_id" value="{{ $car->id }}">
                         <div class="container">
@@ -93,7 +93,7 @@
                                         <div id="order-review" class="panel-collapse collapse" role="tabpanel" aria-labelledby="order-review-heading">
                                             <div class="panel-body">
                                                 <div class="row">
-                                                    {{ $car->desc }}
+                                                    {{ $car->desc[0]->desc }}
                                                 </div>
                                                 <div class="row">
                                                     <h4> Total Price =   ${{ $totalPrice }}</h4>
@@ -105,7 +105,7 @@
                                                             <div class="rq-search-single">
                                                                 <div class="rq-search-content">
                                                                     <span class="rq-search-heading">Pick Up Location</span>
-                                                                    <select name="pickuo_location" class="category-option">
+                                                                    <select name="pickup_location" class="category-option">
                                                                         <option selected value="{{ $car->location->id ?? ''}}" >{{ $car->location->name ?? ''}}</option>
                                                                     </select>
                                                                 </div>

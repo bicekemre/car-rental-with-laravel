@@ -21,7 +21,7 @@
                     <div class="alert">{{ __('login.Invalid credentials') }}</div>
                     @enderror
                     <div class="rq-login-form">
-                        <form action="{{ route('login') }}" method="POST">
+                        <form action="{{ route('login', app()->getLocale()) }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-md-5">
@@ -57,7 +57,7 @@
                 <div class="container">
                     <div class="rq-login-form no-border">
                         <h4>{{ __('login.Dont have an account! Register now') }} </h4>
-                        <form class="form-horizontal"  action="{{ route('register') }}" method="post" >
+                        <form class="form-horizontal"  action="{{ route('register', app()->getLocale()) }}" method="post" >
                             @csrf
                             <div class="row">
                                 <div class="col-md-4">
