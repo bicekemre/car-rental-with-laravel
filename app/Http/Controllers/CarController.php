@@ -9,6 +9,7 @@ use App\Models\Extra;
 use App\Models\Invoice;
 use App\Models\Location;
 use App\Models\Reservation;
+use App\Models\Reviews;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -55,8 +56,10 @@ class CarController extends Controller
         $desc = Desc::query()->where(['lang' => $lang, 'car_id' => $id])->get()->first();
         $extras = Extra::all();
         $locations = Location::all();
+        $reviews = Reviews::query()->where(['car_id' => $id])->orderBy('rating')->get();
+        $countReviews = $reviews->count();
 
-        return view('cars.detail', compact('car', 'extras', 'locations', 'desc'));
+        return view('cars.detail', compact('car', 'extras', 'locations', 'desc', 'reviews', 'countReviews'));
     }
 
     public function book(Request $request)

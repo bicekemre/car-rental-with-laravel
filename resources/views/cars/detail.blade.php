@@ -69,7 +69,7 @@
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active"><a href="#listing_tab_hor_1" aria-controls="listing_tab_hor_1" role="tab" data-toggle="tab">{{ __('detail.Features') }}</a></li>
                                 <li role="presentation" ><a href="#listing_tab_hor_2" aria-controls="listing_tab_hor_2" role="tab" data-toggle="tab">{{ __('detail.Descriptions') }}</a></li>
-                                <li role="presentation"><a href="#listing_tab_hor_3" aria-controls="listing_tab_hor_3" role="tab" data-toggle="tab">{{ __('detail.Reviews') }}(1)</a></li>
+                                <li role="presentation"><a href="#listing_tab_hor_3" aria-controls="listing_tab_hor_3" role="tab" data-toggle="tab">{{ __('detail.Reviews') }}({{ $countReviews }})</a></li>
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content">
@@ -86,34 +86,24 @@
                                    {!! $desc->desc ?? '' !!}
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="listing_tab_hor_3">
+                                    @foreach($reviews as $review)
                                     <div class="rq-single-post-header">
                                         <div class="author-info-content">
-                                            <div class="author-img"
-                                                 style="background: url('img/post-single/single-post-author.jpg') top center no-repeat; background-size: cover">
-                                            </div>
-                                            <span class="author-name"><a href="#">Alex</a>
-                            <span>
-                              <i class="ion-android-star"></i>
-                              <i class="ion-android-star"></i>
-                              <i class="ion-android-star"></i>
-                              <i class="ion-android-star"></i>
-                              <i class="ion-android-star"></i>
-                            </span>
-                          </span>
-                                            <span class="author-role">Impossible considered invitation him men instrument saw celebrated unpleasant.
-                            Put rest and must set kind next many near nay. He exquisite continued explained middleton am.</span>
+                                          <span class="author-name"><a href="#">{{ $review->user->name }}</a>
+                                            <span>
+                                              @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $review->rating)
+                                                        <i class="ion-android-star"></i>
+                                                    @else
+                                                        <i class="ion-android-star-outline"></i>
+                                                    @endif
+                                                @endfor
+                                            </span>
+                                          </span>
+                                            <span class="author-role">{{ $review->comment }}</span>
                                         </div>
                                     </div>
-                                    <div class="review-form">
-                                        <h4>Write your review</h4>
-                                        <div class="review-star">
-                                            <a href="#"><i class="ion-android-star"></i></a>
-                                            <a href="#"><i class="ion-android-star"></i></a>
-                                            <a href="#"><i class="ion-android-star"></i></a>
-                                            <a href="#"><i class="ion-android-star"></i></a>
-                                            <a href="#"><i class="ion-android-star"></i></a>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
