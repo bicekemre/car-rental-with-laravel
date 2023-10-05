@@ -15,7 +15,7 @@
                         <span class="count-category">{{ __('home.Cars') }}</span>
                     </li>
                     <li>
-                        <span class="count-result" data-from="25" data-to="12460" data-speed="{{ $reviewsCount }}" data-refresh-interval="50"></span>
+                        <span class="count-result" data-from="25" data-to="{{ $reviewsCount }}" data-speed="5000" data-refresh-interval="50"></span>
                         <span class="count-category">{{ __('home.Reviews') }}</span>
                     </li>
                 </ul>
