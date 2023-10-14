@@ -25,6 +25,8 @@ class Lang
 
         app()->setLocale($lang[1] ?? 'en');
 
+//        $request->merge(['lang?' => app()->getLocale()]);
+
         return $next($request);
     }
 

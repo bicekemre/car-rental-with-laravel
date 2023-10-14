@@ -24,10 +24,10 @@ class AuthController extends Controller
             if (isset($_COOKIE['request_data'])) {
                 return redirect()->route('book', app()->getLocale());
             }else{
-                return redirect()->route('home', app()->getLocale());
+                return redirect()->route('profile', app()->getLocale());
             }
         } else {
-            return back()->withErrors(['email' => 'Invalid credentials']);
+            return back()->withErrors(['email' => 'Invalid credentials', 'password' => 'Invalid credentials']);
         }
 
     }

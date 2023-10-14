@@ -23,24 +23,25 @@
                             <div class="col-md-8">
                                 <div id="respond" class="comment-respond">
                                     <h2 class="single-sub-title">Information</h2>
-                                    <form id="commentform" class="commentform" action="#">
+                                    <form action="{{ route('profile.edit') }}" method="post">
+                                        @csrf
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <input type="text" class="comment-input" placeholder="Enter your name...">
+                                                <input type="text" name="name" class="comment-input" placeholder="Enter your name..." value="{{ $user->name }}">
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="comment-input" placeholder="Enter your last name...">
+                                                <input type="text" name="last_name" class="comment-input" placeholder="Enter your last name..." value="{{ $user->last_name }}">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <input type="text" class="comment-input" placeholder="Enter your phone...">
+                                                <input type="text" name="phone" class="comment-input" placeholder="Enter your phone..." value="{{ $user->phone }}">
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="email" class="comment-input" placeholder="Enter your email...">
+                                                <input type="email" name="email" class="comment-input" placeholder="Enter your email..." value="{{ $user->email }}">
                                             </div>
                                             <div class="col-md-12">
-                                                <button class="continue-btn rq-btn rq-btn-normal">Submit Comment</button>
+                                                <button type="submit" class="continue-btn rq-btn rq-btn-normal">Submit Comment</button>
                                             </div>
                                         </div>
                                     </form>
