@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,7 +55,17 @@ class AuthController extends Controller
 
     public function profile()
     {
-        return view('profile');
+        if (auth()->check() == 0) {
+            return redirect()->route('registration', app()->getLocale());
+        }
+        $user = \auth()->user();
+
+        $currentReservation = Reservation::query()->where(['user_id' => $user->getAuthIdentifier(), 'is_completed' => 1])->get();
+
+        $reservations = Reservation::query()->where(['user_id' => $user->getAuthIdentifier(), 'is_completed' => 0])->get();
+
+
+        return view('profiles.profile',compact('user','reservations', 'currentReservation'));
     }
 
     public function logout()

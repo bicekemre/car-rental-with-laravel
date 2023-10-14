@@ -18,6 +18,8 @@ class HomeController extends Controller
         $usersCount  = User::all()->count();
         $reviewsCount = Reviews::all()->count();
 
-        return view('home', compact('locations', 'cars', 'carsCount', 'usersCount', 'reviewsCount'));
+        return view('home', compact(
+            'locations',
+            'cars', 'carsCount', 'usersCount', 'reviewsCount'));
     }
 }
