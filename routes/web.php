@@ -79,6 +79,7 @@ Route::middleware('language')->group(function (){
 
 Route::post('/profile/edit', [UserController::class, 'edit'])->name('profile.edit');
 
+Route::post('/profile/password', [UserController::class, 'password'])->name('profile.password');
 
 
 

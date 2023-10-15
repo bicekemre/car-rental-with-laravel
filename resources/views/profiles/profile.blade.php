@@ -41,7 +41,36 @@
                                                 <input type="email" name="email" class="comment-input" placeholder="Enter your email..." value="{{ $user->email }}">
                                             </div>
                                             <div class="col-md-12">
-                                                <button type="submit" class="continue-btn rq-btn rq-btn-normal">Submit Comment</button>
+                                                <button type="submit" class="continue-btn rq-btn rq-btn-normal">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h2 class="brand-title">Password<span class="dot">.</span></h2>
+                            </div>
+                            <div class="col-md-8">
+                                <div id="respond" class="comment-respond">
+                                    <h2 class="single-sub-title">Password Change</h2>
+                                    <form action="{{ route('profile.password') }}" method="post">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <input type="password" name="password" class="comment-input" placeholder="Enter your password...">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="password" name="new_password" class="comment-input" placeholder="Enter new password...">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="password" name="re_new_password" class="comment-input" placeholder="Password Confirmation...">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="continue-btn rq-btn rq-btn-normal">Submit</button>
                                             </div>
                                         </div>
                                     </form>
@@ -73,7 +102,7 @@
                                                         <h5>{{ $reservation->car->brand. ' ' . $reservation->car->model }}</h5>
                                                         <ul class="items">
                                                             <li>Arrive Date: <span>{{ $reservation->pickup_date }}</span></li>
-                                                            <li>Depature Date: <span>{{ $reservation->return_date }}</span> </li>
+                                                            <li>Departure Date: <span>{{ $reservation->return_date }}</span> </li>
                                                             <li>Pickup Location: <span>{{ $reservation->pickupLocation->name }}</span></li>
                                                             <li>Return Location: <span>{{ $reservation->returnLocation->name }}</span></li>
                                                         </ul>
