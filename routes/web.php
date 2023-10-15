@@ -81,5 +81,9 @@ Route::post('/profile/edit', [UserController::class, 'edit'])->name('profile.edi
 
 Route::post('/profile/password', [UserController::class, 'password'])->name('profile.password');
 
+Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+
+Route::get('/about-us', [HomeController::class, 'aboutus'])->name('aboutus');
+
 
 

@@ -22,4 +22,14 @@ class HomeController extends Controller
             'locations',
             'cars', 'carsCount', 'usersCount', 'reviewsCount'));
     }
+
+    public function blog()
+    {
+        return view('blog');
+    }
+
+    public function aboutus()
+    {
+        return view('about-us');
+    }
 }
