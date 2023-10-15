@@ -55,6 +55,9 @@
                             <div class="col-md-8">
                                 <div id="respond" class="comment-respond">
                                     <h2 class="single-sub-title">Password Change</h2>
+                                    @error('password-confirmation')
+                                        <h2 class="danger">Invalid passwords</h2>
+                                    @enderror
                                     <form action="{{ route('profile.password') }}" method="post">
                                         @csrf
                                         <div class="row">
