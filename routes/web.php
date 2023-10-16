@@ -28,6 +28,10 @@ Route::middleware('language')->group(function (){
         Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 
+        Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+
+        Route::get('/about-us', [HomeController::class, 'aboutus'])->name('aboutus');
+
 
         Route::post('/register', [AuthController::class, 'register'])
             ->name('register');
@@ -80,10 +84,6 @@ Route::middleware('language')->group(function (){
 Route::post('/profile/edit', [UserController::class, 'edit'])->name('profile.edit');
 
 Route::post('/profile/password', [UserController::class, 'password'])->name('profile.password');
-
-Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
-
-Route::get('/about-us', [HomeController::class, 'aboutus'])->name('aboutus');
 
 
 
