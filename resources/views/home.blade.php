@@ -92,12 +92,12 @@
                         @foreach($cars as $car)
                             <div class="item">
                                 <div class="car-details-bg">
-                                    <span>{{ $car->price_perday }}/{{ __('home.Days') }}</span>
+                                    <span>${{ $car->price_perday }}/{{ __('home.Days') }}</span>
                                     <div class="owl-title-area">
                                         <h4><a href="#">{{ $car->brand . ' ' .$car->model }}</a></h4>
                                     </div>
                                 </div>
-                                <img src="{{ asset('img/tab-image/full-img1.png') }}" data-img-src="" alt="">
+                                <img src="{{ asset($car->imageable->first()->url ?? '') }}" data-img-src="" alt="">
                             </div>
                         @endforeach
                     @endisset
