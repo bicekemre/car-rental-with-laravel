@@ -22,7 +22,7 @@
                     <a href="{{ route('cars', app()->getLocale()) }}">{{ __('navbar.cars') }}</a>
                 </li>
                 <li class="">
-                    <a href="">{{ __('navbar.blog') }}</a>
+                    <a href="{{ route('blog', app()->getLocale()) }}">{{ __('navbar.blog') }}</a>
                 </li>
                 <li class="">
                     <a href="{{ route('aboutus', app()->getLocale()) }}">{{ __('navbar.about us') }}</a>
