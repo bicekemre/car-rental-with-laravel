@@ -18,27 +18,27 @@
                 <li class="{{ Request::is('home*') ? 'active' : '' }}">
                     <a href="{{ route('home', app()->getLocale()) }}">{{ __('navbar.home') }}</a>
                 </li>
-                <li class="{{ Request::is('cars*') ? 'active' : '' }}">
+                <li class="{{ Request::is(app()->getLocale().'/cars*') ? 'active' : '' }}">
                     <a href="{{ route('cars', app()->getLocale()) }}">{{ __('navbar.cars') }}</a>
                 </li>
-                <li class="{{ Request::is('blog*') ? 'active' : '' }}">
+                <li class="{{  Request::is(app()->getLocale().'blog*') ? 'active' : '' }}">
                     <a href="{{ route('blog', app()->getLocale()) }}">{{ __('navbar.blog') }}</a>
                 </li>
-                <li class="{{ Request::is('contact*') ? 'active' : '' }}">
+                <li class="{{  Request::is(app()->getLocale().'contact*') ? 'active' : '' }}">
                     <a href="{{ route('contact', app()->getLocale()) }}">{{ __('navbar.contact') }}</a>
                 </li>
-                <li class="{{ Request::is('aboutus*') ? 'active' : '' }}">
+                <li class="{{  Request::is(app()->getLocale().'aboutus*') ? 'active' : '' }}">
                     <a href="{{ route('aboutus', app()->getLocale()) }}">{{ __('navbar.about us') }}</a>
                 </li>
                 @if(auth()->user())
-                    <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ route('profile', app()->getLocale()) }}">
+                    <li class="{{  Request::is(app()->getLocale().'profile*') ? 'active' : '' }}"><a href="{{ route('profile', app()->getLocale()) }}">
                             {{ __('navbar.profile') }}</a>
                     </li>
-                    <li class="{{ Request::is('logout*') ? 'active' : '' }}"><a href="{{ route('logout', app()->getLocale()) }}">
+                    <li class="{{  Request::is(app()->getLocale().'logout*') ? 'active' : '' }}"><a href="{{ route('logout', app()->getLocale()) }}">
                             {{ __('navbar.logout') }}</a>
                     </li>
                 @else
-                    <li class="login-register-link right-side-link {{ Request::is('registration*') ? 'active' : '' }}"><a href="{{ route('registration', app()->getLocale()) }}">
+                    <li class="login-register-link right-side-link {{  Request::is(app()->getLocale().'registration*') ? 'active' : '' }}"><a href="{{ route('registration', app()->getLocale()) }}">
                             <i class="icon_lock-open_alt"></i>Login</a>
                     </li>
                 @endif

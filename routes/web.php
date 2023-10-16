@@ -32,6 +32,8 @@ Route::middleware('language')->group(function (){
 
         Route::get('/about-us', [HomeController::class, 'aboutus'])->name('aboutus');
 
+        Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+
 
         Route::post('/register', [AuthController::class, 'register'])
             ->name('register');
