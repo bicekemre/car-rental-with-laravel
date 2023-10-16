@@ -25,13 +25,13 @@
                     <a href="">{{ __('navbar.blog') }}</a>
                 </li>
                 <li class="">
-                    <a href="/about-us">{{ __('navbar.about us') }}</a>
+                    <a href="{{ route('aboutus', app()->getLocale()) }}">{{ __('navbar.about us') }}</a>
                 </li>
                 <li class="logo">
                     <a href="/"><img src="{{ asset('img/home-two-logo.png') }}" alt=""></a>
                 </li>
                 <li class="">
-                    <a href="/contact">{{ __('navbar.contact') }}</a>
+                    <a href="{{ route('contact', app()->getLocale()) }}">{{ __('navbar.contact') }}</a>
                 </li>
                 @if(auth()->user())
                     <li class=""><a href="{{ route('profile', app()->getLocale()) }}">
