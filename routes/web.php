@@ -88,4 +88,4 @@ Route::post('/profile/edit', [UserController::class, 'edit'])->name('profile.edi
 Route::post('/profile/password', [UserController::class, 'password'])->name('profile.password');
 
 
-
+include 'admin.php';
