@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+include 'admin.php';
+
 Route::middleware('language')->group(function (){
     Route::permanentRedirect('/home', '/' .  app()->getLocale(). '/home');
     Route::permanentRedirect('/', '/' .  app()->getLocale(). '/home');
@@ -88,4 +91,3 @@ Route::post('/profile/edit', [UserController::class, 'edit'])->name('profile.edi
 Route::post('/profile/password', [UserController::class, 'password'])->name('profile.password');
 
 
-include 'admin.php';
