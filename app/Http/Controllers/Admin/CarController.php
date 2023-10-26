@@ -15,3 +15,4 @@ class CarController extends Controller
         return  view('admin.cars.index', compact('cars'));
     }
 }
+
