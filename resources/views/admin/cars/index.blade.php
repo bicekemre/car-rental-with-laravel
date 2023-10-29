@@ -35,7 +35,7 @@
                                                 </div>
                                             </div>
                                             <div class="contact-item-actions">
-                                                <a href="#" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('detail', ['id' => $car->id, 'lang' => app()->getLocale()] ) }}" class="btn btn-success"><i class="fa fa-eye"></i></a>
                                                 <a href="javascript:void(0)" class="btn btn-success" data-toggle="modal" data-target="#contactModal"><i class="fa fa-edit"></i></a>
                                                 <a href="javascript:void(0)" class="btn btn-danger" data-toggle="modal" data-target="#deleteItemModal"><i class="fa fa-trash"></i></a>
                                             </div><!-- .contact-item-actions -->
