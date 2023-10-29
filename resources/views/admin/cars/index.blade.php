@@ -5,6 +5,11 @@
         <div class="wrap">
             <section class="app-content" id="contact">
                 <div class="row">
+                    <div class="m-b-lg">
+                        <a href="#" data-toggle="modal" data-target="#contactModal" class="btn btn-primary btn-block">Add New Car</a>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-12">
                         <div id="contacts-list" class="row">
                             @isset($cars)
@@ -19,19 +24,18 @@
                                                     </div>
                                                 </div>
                                                 <div class="media-body">
-                                                    <h5 class="media-heading title-color">John Doe</h5>
-                                                    <small class="media-meta">Web Developer</small>
-                                                    <div class="contact-links m-t-sm">
-                                                        <a href="javascript:void(0)" class="icon icon-circle icon-sm m-b-0" data-toggle="tooltip" title="Phone" data-placement="top"><i class="fa fa-phone"></i></a>
-                                                        <a href="javascript:void(0)" class="icon icon-circle icon-sm m-b-0" data-toggle="tooltip" title="Mobile" data-placement="top"><i class="fa fa-mobile"></i></a>
-                                                        <a href="mailto:example@rathemes.com" class="icon icon-circle icon-sm m-b-0" data-toggle="tooltip" title="example@rathemes.com" data-placement="top"><i class="fa fa-envelope-o"></i></a>
-                                                        <a href="javascript:void(0)" class="icon icon-circle icon-sm m-b-0" data-toggle="tooltip" title="rathemes" data-placement="top"><i class="fab fa-skype"></i></a>
-                                                        <a href="https://facebook.com/rathemes" class="icon icon-circle icon-sm m-b-0" data-toggle="tooltip" title="Facebook" data-placement="top"><i class="fab fa-facebook"></i></a>
-                                                        <a href="https://twitter.com/rathemes" class="icon icon-circle icon-sm m-b-0" data-toggle="tooltip" title="Twitter" data-placement="top"><i class="fab fa-twitter"></i></a>
+                                                    <h5 class="media-heading title-color">{{ $car->brand . ' ' . $car->model}}</h5>
+                                                    <div>
+                                                    <small class="media-meta">Class: {{ $car->class }}</small>
+                                                    </div>
+                                                    <small class="media-meta">Body Style: {{ $car->type }}</small>
+                                                    <div>
+                                                    <small class="media-meta">Transmission: {{ $car->transmission }}</small>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="contact-item-actions">
+                                                <a href="#" class="btn btn-success"><i class="fa fa-eye"></i></a>
                                                 <a href="javascript:void(0)" class="btn btn-success" data-toggle="modal" data-target="#contactModal"><i class="fa fa-edit"></i></a>
                                                 <a href="javascript:void(0)" class="btn btn-danger" data-toggle="modal" data-target="#deleteItemModal"><i class="fa fa-trash"></i></a>
                                             </div><!-- .contact-item-actions -->
@@ -51,21 +55,66 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Create / update contact</h4>
+                        <h4 class="modal-title">Create Cars</h4>
                     </div>
-                    <form action="#" id="newContactForm">
+                    <form action="{{ route('car.create') }}" method="post" id="newContactForm">
+                        @csrf
                         <div class="modal-body">
                             <div class="form-group">
-                                <input type="text" id="contactName" class="form-control" placeholder="Name">
+                                <input type="text" id="brand" class="form-control" placeholder="Car Brand">
                             </div>
                             <div class="form-group">
-                                <input type="text" id="contactImgUrl" class="form-control" placeholder="Image URL">
+                                <input type="text" id="model" class="form-control" placeholder="Car Model">
                             </div>
                             <div class="form-group">
-                                <input type="text" id="contactOccupation" class="form-control" placeholder="Occupation">
+                                <input type="number" id="contactImgUrl" class="form-control" placeholder="Car Year">
                             </div>
                             <div class="form-group">
-                                <input type="email" id="contactEmail" class="form-control" placeholder="Email">
+                                <input type="number" id="contactOccupation" class="form-control" placeholder="Millage">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" id="contactOccupation" class="form-control" placeholder="Seats">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" id="contactOccupation" class="form-control" placeholder="Fuel Amount">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" id="contactOccupation" class="form-control" placeholder="Price Per day">
+                            </div>
+                            <div class="form-group">
+                                <select name="type" class="form-control">
+                                    <option value="">Select Type</option>
+                                    <option value="SUV">SUV</option>
+                                    <option value="Sedan">Sedan</option>
+                                    <option value="van">Van</option>
+                                    <option value="Station Wagon">Station Wagon</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select name="transmission" class="form-control">
+                                    <option value="">Select Transmission</option>
+                                    <option value="Manuel">Manuel</option>
+                                    <option value="Auto">Auto</option>
+                                    <option value="Semi-Auto">Semi-Auto</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select name="fuel_type" class="form-control">
+                                    <option value="">Select Fuel Type</option>
+                                    <option value="Petrol">Petrol</option>
+                                    <option value="Diesel">Diesel</option>
+                                    <option value="Electric">Electric</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select name="location_id" class="form-control">
+                                    <option value="">Select Location</option>
+                                    @isset($locations)
+                                        @foreach($locations as $location)
+                                            <option value="{{ $location->id }}">{{ $location->name }}</option>
+                                        @endforeach
+                                    @endisset
+                                </select>
                             </div>
                         </div><!-- .modal-body -->
                         <div class="modal-footer">
