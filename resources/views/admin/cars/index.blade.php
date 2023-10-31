@@ -55,7 +55,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Create Cars</h4>
+                        <h4 class="modal-title">Create / Update Cars</h4>
                     </div>
                     <form action="{{ route('car.create') }}" method="post" id="newContactForm">
                         @csrf
@@ -168,4 +168,51 @@
         </div><!-- /.modal -->
         <!-- end content -->
     </div>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#newContactForm').submit(function(e) {
+                e.preventDefault();
+                var id  = $('#id').val();
+                var brand = $('#brand').val();
+                var model = $('#model').val();
+                var year = $('#contactImgUrl').val();
+                var mileage = $('#contactOccupation').val();
+                var seats = $('#contactOccupation').val();
+                var fuelAmount = $('#contactOccupation').val();
+                var pricePerDay = $('#contactOccupation').val();
+                var type = $('select[name="type"]').val();
+                var transmission = $('select[name="transmission"]').val();
+                var fuelType = $('select[name="fuel_type"]').val();
+                var locationId = $('select[name="location_id"]').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('car.create') }}',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        brand: brand,
+                        model: model,
+                        year: year,
+                        mileage: mileage,
+                        seats: seats,
+                        fuelAmount: fuelAmount,
+                        pricePerDay: pricePerDay,
+                        type: type,
+                        transmission: transmission,
+                        fuelType: fuelType,
+                        locationId: locationId
+                    },
+                    success: function(response) {
+                        // AJAX başarılı bir şekilde tamamlandığında yapılacak işlemleri burada gerçekleştirin.
+                        // Örneğin, formun temizlenmesi veya başka bir işlem.
+                    },
+                    error: function(xhr, status, error) {
+                        // AJAX hatası durumunda yapılacak işlemleri burada gerçekleştirin.
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

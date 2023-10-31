@@ -19,7 +19,11 @@ class CarController extends Controller
 
     public function create(Request $request)
     {
-        $car = new Car();
+        if ($request->id == null) {
+            $car = new Car();
+        }else{
+            $car = Car::find($request->id);
+        }
 
         $car->brand = $request->brand;
         $car->model = $request->model;
