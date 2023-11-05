@@ -6,7 +6,7 @@
             <section class="app-content" id="contact">
                 <div class="row">
                     <div class="m-b-lg">
-                        <a href="#" data-toggle="modal" data-target="#contactModal" class="btn btn-primary btn-block">Add New Car</a>
+                        <a href="{{ route('cars.edit', 'create') }}" class="btn btn-primary btn-block">Add New Car</a>
                     </div>
                 </div>
                 <div class="row">
@@ -49,106 +49,6 @@
             </section><!-- .app-content -->
         </div><!-- .wrap -->
 
-        <!-- new contact Modal -->
-        <div id="contactModal" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Create / Update Cars</h4>
-                    </div>
-                    <form action="{{ route('car.create') }}" method="post" id="newContactForm">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input type="text" id="brand" class="form-control" placeholder="Car Brand">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="model" class="form-control" placeholder="Car Model">
-                            </div>
-                            <div class="form-group">
-                                <input type="number" id="contactImgUrl" class="form-control" placeholder="Car Year">
-                            </div>
-                            <div class="form-group">
-                                <input type="number" id="contactOccupation" class="form-control" placeholder="Millage">
-                            </div>
-                            <div class="form-group">
-                                <input type="number" id="contactOccupation" class="form-control" placeholder="Seats">
-                            </div>
-                            <div class="form-group">
-                                <input type="number" id="contactOccupation" class="form-control" placeholder="Fuel Amount">
-                            </div>
-                            <div class="form-group">
-                                <input type="number" id="contactOccupation" class="form-control" placeholder="Price Per day">
-                            </div>
-                            <div class="form-group">
-                                <select name="type" class="form-control">
-                                    <option value="">Select Type</option>
-                                    <option value="SUV">SUV</option>
-                                    <option value="Sedan">Sedan</option>
-                                    <option value="van">Van</option>
-                                    <option value="Station Wagon">Station Wagon</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select name="transmission" class="form-control">
-                                    <option value="">Select Transmission</option>
-                                    <option value="Manuel">Manuel</option>
-                                    <option value="Auto">Auto</option>
-                                    <option value="Semi-Auto">Semi-Auto</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select name="fuel_type" class="form-control">
-                                    <option value="">Select Fuel Type</option>
-                                    <option value="Petrol">Petrol</option>
-                                    <option value="Diesel">Diesel</option>
-                                    <option value="Electric">Electric</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select name="location_id" class="form-control">
-                                    <option value="">Select Location</option>
-                                    @isset($locations)
-                                        @foreach($locations as $location)
-                                            <option value="{{ $location->id }}">{{ $location->name }}</option>
-                                        @endforeach
-                                    @endisset
-                                </select>
-                            </div>
-                        </div><!-- .modal-body -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
-                        </div><!-- .modal-footer -->
-                    </form>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-
-        <!-- new category Modal -->
-        <div id="categoryModal" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Create / update category</h4>
-                    </div>
-                    <form action="#" id="newCategoryForm">
-                        <div class="modal-body">
-                            <div class="form-group m-0">
-                                <input type="text" id="catLabel" class="form-control" placeholder="Label">
-                            </div>
-                        </div><!-- .modal-body -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
-                        </div><!-- .modal-footer -->
-                    </form>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-
         <!-- delete item Modal -->
         <div id="deleteItemModal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog">
@@ -168,51 +68,4 @@
         </div><!-- /.modal -->
         <!-- end content -->
     </div>
-@endsection
-@section('script')
-    <script>
-        $(document).ready(function() {
-            $('#newContactForm').submit(function(e) {
-                e.preventDefault();
-                var id  = $('#id').val();
-                var brand = $('#brand').val();
-                var model = $('#model').val();
-                var year = $('#contactImgUrl').val();
-                var mileage = $('#contactOccupation').val();
-                var seats = $('#contactOccupation').val();
-                var fuelAmount = $('#contactOccupation').val();
-                var pricePerDay = $('#contactOccupation').val();
-                var type = $('select[name="type"]').val();
-                var transmission = $('select[name="transmission"]').val();
-                var fuelType = $('select[name="fuel_type"]').val();
-                var locationId = $('select[name="location_id"]').val();
-
-                $.ajax({
-                    type: 'POST',
-                    url: '{{ route('car.create') }}',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        brand: brand,
-                        model: model,
-                        year: year,
-                        mileage: mileage,
-                        seats: seats,
-                        fuelAmount: fuelAmount,
-                        pricePerDay: pricePerDay,
-                        type: type,
-                        transmission: transmission,
-                        fuelType: fuelType,
-                        locationId: locationId
-                    },
-                    success: function(response) {
-                        // AJAX başarılı bir şekilde tamamlandığında yapılacak işlemleri burada gerçekleştirin.
-                        // Örneğin, formun temizlenmesi veya başka bir işlem.
-                    },
-                    error: function(xhr, status, error) {
-                        // AJAX hatası durumunda yapılacak işlemleri burada gerçekleştirin.
-                    }
-                });
-            });
-        });
-    </script>
 @endsection

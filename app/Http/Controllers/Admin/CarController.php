@@ -17,6 +17,13 @@ class CarController extends Controller
         return  view('admin.cars.index', compact('cars', 'locations'));
     }
 
+    public function add()
+    {
+        $locations = Location::all();
+
+        return view('admin.cars.edit', compact('locations'));
+    }
+
     public function create(Request $request)
     {
         if ($request->id == null) {
@@ -28,7 +35,6 @@ class CarController extends Controller
         $car->brand = $request->brand;
         $car->model = $request->model;
         $car->mil = $request->mil;
-        $car->transmission = $request->transmission;
         $car->seats = $request->seats;
         $car->fuel_type = $request->fuel_type;
         $car->fuel_amount = $request->fuel_amount;
