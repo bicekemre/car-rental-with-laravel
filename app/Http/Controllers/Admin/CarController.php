@@ -21,6 +21,7 @@ class CarController extends Controller
     {
         $locations = Location::all();
 
+
         return view('admin.cars.edit', compact('locations'));
     }
 
